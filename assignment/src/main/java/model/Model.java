@@ -4,7 +4,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 import tsmodel.*;
@@ -21,12 +20,6 @@ public class Model {
     public static Model parseModel(String filePath) throws IOException {
         Gson gson = new Gson();
         Model model = gson.fromJson(new FileReader(filePath), Model.class);
-//        for (State s : model.states) {
-//            System.out.println(s);
-//        }
-//        for (Transition t : model.transitions) {
-//            System.out.println(t);
-//        }
         return model;
     }
 
@@ -43,12 +36,9 @@ public class Model {
     	            	st.addTransition(ts);
     	            }
     	        }
-    			System.out.println(st);
+    			tsmodel.addInitialState(st);
     		}
-    	}
-    	
-    	
-    	return tsmodel;
+    	} return tsmodel;
     }
     
     /**

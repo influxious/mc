@@ -1,5 +1,6 @@
 package formula.stateFormula;
 
+import tsmodel.TSState;
 import formula.FormulaParser;
 
 public class Not extends StateFormula {
@@ -17,4 +18,13 @@ public class Not extends StateFormula {
         buffer.append(")");
     }
 
+    @Override
+    public boolean isValidState(TSState state){
+    	if (stateFormula.isValidState(state)){
+    		return false;
+    	} else {
+    		return true;
+    	}
+    }
+    
 }

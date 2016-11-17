@@ -1,5 +1,7 @@
 package formula.stateFormula;
 
+import tsmodel.*;
+
 public abstract class StateFormula {
     public abstract void writeToBuffer(StringBuilder buffer);
 
@@ -10,4 +12,8 @@ public abstract class StateFormula {
         return buffer.toString();
     }
 
+    public boolean isValidState(TSState state){
+    	return isValidState(state);
+    }
+    
 }

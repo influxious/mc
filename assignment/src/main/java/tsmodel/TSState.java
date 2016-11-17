@@ -23,6 +23,13 @@ public class TSState {
     	return transitions;
     }
     
+    public boolean containsAtomicProp(String ap){
+    	if (atomicProp.contains(ap)){
+    		return true;
+    	} else {
+    		return false;
+    	}
+    }
     
     @Override
     public String toString() {

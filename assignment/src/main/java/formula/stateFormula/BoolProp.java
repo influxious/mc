@@ -1,5 +1,7 @@
 package formula.stateFormula;
 
+import tsmodel.TSState;
+
 public class BoolProp extends StateFormula {
     public final boolean value;
 
@@ -13,4 +15,8 @@ public class BoolProp extends StateFormula {
         buffer.append(" " + stringValue + " ");
     }
 
+    @Override
+    public boolean isValidState(TSState state){
+    	return value;
+    } 
 }

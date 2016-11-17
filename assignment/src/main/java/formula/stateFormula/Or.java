@@ -1,5 +1,7 @@
 package formula.stateFormula;
 
+import tsmodel.TSState;
+
 public class Or extends StateFormula {
     public final StateFormula left;
     public final StateFormula right;
@@ -18,4 +20,13 @@ public class Or extends StateFormula {
         buffer.append(")");
     }
 
+    @Override
+    public boolean isValidState(TSState state){
+    	if(left.isValidState(state) || right.isValidState(state)){
+    		return true;
+    	} else {
+    		return false;
+    	}
+    }
+    
 }
