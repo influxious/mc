@@ -15,9 +15,13 @@ public class Model {
     public static Model parseModel(String filePath) throws IOException {
         Gson gson = new Gson();
         Model model = gson.fromJson(new FileReader(filePath), Model.class);
-        for (Transition t : model.transitions) {
-            System.out.println(t);
-            ;
+        for (State s : model.states) {
+            for (Transition t : model.transitions) {
+            	if (t.getSource().equals(s.getName())){
+            		s.addTransition(t);
+            	}
+            }
+            System.out.println(s);
         }
         return model;
     }
@@ -36,8 +40,9 @@ public class Model {
      * 
      * @return list of transition for the given model
      */
-    public Transition[] getTransitions() {
-        return transitions;
-    }
+//    public Transition[] getTransitions() {
+//    	System.out.println("HERRE");
+//        return transitions;
+//    }
 
 }

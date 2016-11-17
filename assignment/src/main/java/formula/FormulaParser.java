@@ -43,6 +43,7 @@ public class FormulaParser {
         JsonElement jsonElement = parser.parse(new FileReader(filePath));
         jsonFormula = jsonElement.getAsJsonObject();
         String formula = jsonFormula.get(JSON_FORMULA_FIELD).getAsString();
+        System.out.println("Formula: " + formula);
         reader = new Reader(formula);
     }
 
@@ -77,9 +78,12 @@ public class FormulaParser {
 
     public StateFormula recursiveParseStateFormula() throws IOException {
         char nextChar = reader.nextChar();
+        System.out.println(nextChar);
         if (nextChar == LEFT_BRACKET_TOKEN) {
+            System.out.println("left bracket");
             return recursiveParseStateFormulaHelper();
         } else {
+            System.out.println("else");
             return parseStateFormula(nextChar);
         }
     }

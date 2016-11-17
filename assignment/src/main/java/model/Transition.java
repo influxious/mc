@@ -35,6 +35,7 @@ public class  Transition {
 	
     @Override
     public String toString() {
+//    System.out.println("ALEX WAS HERE");
 	StringBuilder sb = new StringBuilder();
 	sb.append(this.source+"-");
 	sb.append(Arrays.toString(this.actions)+"-");
