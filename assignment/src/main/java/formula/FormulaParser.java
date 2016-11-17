@@ -9,7 +9,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import formula.pathFormula.*;
-import formula.stateFormula.AtomicProp;
 import formula.stateFormula.*;
 
 /**
@@ -43,7 +42,6 @@ public class FormulaParser {
         JsonElement jsonElement = parser.parse(new FileReader(filePath));
         jsonFormula = jsonElement.getAsJsonObject();
         String formula = jsonFormula.get(JSON_FORMULA_FIELD).getAsString();
-        System.out.println("Formula: " + formula);
         reader = new Reader(formula);
     }
 
@@ -78,12 +76,10 @@ public class FormulaParser {
 
     public StateFormula recursiveParseStateFormula() throws IOException {
         char nextChar = reader.nextChar();
-        System.out.println(nextChar);
         if (nextChar == LEFT_BRACKET_TOKEN) {
-            System.out.println("left bracket");
-            return recursiveParseStateFormulaHelper();
+        	StateFormula sf = recursiveParseStateFormulaHelper();
+            return sf;
         } else {
-            System.out.println("else");
             return parseStateFormula(nextChar);
         }
     }
@@ -223,6 +219,13 @@ public class FormulaParser {
     public boolean isLowerCase(char charIn) {
         return (charIn >= 'a' && charIn <= 'z');
     }
+    
+//    public void printActions(Set<String> actions){
+//    	System.out.println("Printing Actions");  
+//    	String[] array = actions.toArray(new String[actions.size()]);
+//    	String[] actions1 = actions.toArray(new String[actions.size()]);
+//    	System.out.println("Actions array: "+ Arrays.toString(array));
+//    }
 
     private Set<String> getActions(String actionSetIdentifier) {
         if (actionSetIdentifier == null) {

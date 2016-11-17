@@ -2,6 +2,12 @@ package model;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
+import tsmodel.*;
 
 import com.google.gson.Gson;
 
@@ -15,17 +21,36 @@ public class Model {
     public static Model parseModel(String filePath) throws IOException {
         Gson gson = new Gson();
         Model model = gson.fromJson(new FileReader(filePath), Model.class);
-        for (State s : model.states) {
-            for (Transition t : model.transitions) {
-            	if (t.getSource().equals(s.getName())){
-            		s.addTransition(t);
-            	}
-            }
-            System.out.println(s);
-        }
+//        for (State s : model.states) {
+//            System.out.println(s);
+//        }
+//        for (Transition t : model.transitions) {
+//            System.out.println(t);
+//        }
         return model;
     }
 
+    public static TSModel transform(Model model){
+    	TSModel tsmodel = new TSModel();
+    	for(State s : model.states){
+    		if(s.isInit()){
+    			Set<String> atomicProps = new HashSet<String>(Arrays.asList(s.getLabel()));
+    			TSState st = new TSState(s.getName(), atomicProps);
+    			for (Transition t : model.transitions) {
+    	            if(t.getSource().equals(s.getName())){
+    	    			Set<String> actions = new HashSet<String>(Arrays.asList(t.getActions()));
+    	            	TSTransition ts = new TSTransition(t.getTarget(), actions);
+    	            	st.addTransition(ts);
+    	            }
+    	        }
+    			System.out.println(st);
+    		}
+    	}
+    	
+    	
+    	return tsmodel;
+    }
+    
     /**
      * Returns the list of the states
      * 
@@ -40,9 +65,8 @@ public class Model {
      * 
      * @return list of transition for the given model
      */
-//    public Transition[] getTransitions() {
-//    	System.out.println("HERRE");
-//        return transitions;
-//    }
+    public Transition[] getTransitions() {
+        return transitions;
+    }
 
 }

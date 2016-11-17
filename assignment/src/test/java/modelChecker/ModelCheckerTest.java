@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import org.junit.Test;
 
+import tsmodel.TSModel;
 import formula.FormulaParser;
 import formula.stateFormula.StateFormula;
 import modelChecker.ModelChecker;
@@ -24,18 +25,35 @@ public class ModelCheckerTest {
     public void buildAndCheckModel() {
         try {
             Model model = Model.parseModel("src/test/resources/model1.json");
-
-            StateFormula fairnessConstraint = new FormulaParser("src/test/resources/constraint1.json").parse();
-
+            TSModel ts = Model.transform(model);
             
-//            StateFormula query = new FormulaParser("src/test/resources/ctl1.json").parse();
-			  StateFormula query = new FormulaParser("src/test/resources/ctl2.json").parse();
-	          System.out.println(query.toString());
-	          
+//            StateFormula fairnessConstraint = new FormulaParser("src/test/resources/constraint1.json").parse();
+//            StateFormula query = new FormulaParser("src/test/resources/ctl2.json").parse();
 //            ModelChecker mc = new SimpleModelChecker();
 
             // TO IMPLEMENT
             // assertTrue(mc.check(model, fairnessConstraint, query));
+        } catch (IOException e) {
+            e.printStackTrace();
+            fail(e.toString());
+        }
+    }
+    
+    @Test
+    public void buildAndCheckModel2() {
+        try {
+            Model model = Model.parseModel("src/test/resources/model1.json");
+
+            StateFormula fairnessConstraint = new FormulaParser("src/test/resources/constraint1.json").parse();
+	        System.out.println("Fairness: " + fairnessConstraint.toString());
+            
+            StateFormula query = new FormulaParser("src/test/resources/ctl2.json").parse();
+	        System.out.println("Query: "+query.toString());
+	          
+            ModelChecker mc = new SimpleModelChecker();
+
+            // TO IMPLEMENT
+             assertTrue(mc.check(model, fairnessConstraint, query));
         } catch (IOException e) {
             e.printStackTrace();
             fail(e.toString());

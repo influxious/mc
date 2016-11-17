@@ -1,13 +1,17 @@
 package modelChecker;
 
 import formula.stateFormula.StateFormula;
-import model.Model;
+import model.*;
 
 public class SimpleModelChecker implements ModelChecker {
 
     @Override
     public boolean check(Model model, StateFormula constraint, StateFormula query) {
-        // TODO Auto-generated method stub
+        State[] states = model.getStates();
+    	
+    	
+    	
+    	
         return false;
     }
 
