@@ -1,5 +1,6 @@
 package formula.stateFormula;
 
+import tsmodel.TSState;
 import formula.*;
 import formula.pathFormula.PathFormula;
 
@@ -17,4 +18,10 @@ public class ForAll extends StateFormula {
         pathFormula.writeToBuffer(buffer);
         buffer.append(")");
     }
+    
+    @Override
+    public boolean isValidState(TSState state){
+    	return pathFormula.isValidState(state, this);
+    }
+    
 }

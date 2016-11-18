@@ -2,7 +2,10 @@ package formula.pathFormula;
 
 import formula.FormulaParser;
 import formula.stateFormula.*;
+
 import java.util.*;
+
+import tsmodel.TSState;
 
 public class Eventually extends PathFormula {
     public final StateFormula stateFormula;
@@ -30,5 +33,11 @@ public class Eventually extends PathFormula {
         stateFormula.writeToBuffer(buffer);
         ;
     }
+
+	@Override
+	public boolean isValidState(TSState state, StateFormula sf) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

@@ -6,15 +6,15 @@ import java.util.Set;
 
 public class  TSTransition {
 
-	private String target;
+	private TSState target;
     private Set<String> actions;
     
-    public TSTransition(String target, Set<String> actions){
+    public TSTransition(TSState target, Set<String> actions){
     	this.target = target;
     	this.actions = actions;
     }
     
-	public String getTarget() {
+	public TSState getTarget() {
 		return target;
 	}
 	

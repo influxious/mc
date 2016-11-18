@@ -27,4 +27,6 @@ public interface ModelChecker {
 
     // Returns a trace of the previous check attempt if it failed.
     public String[] getTrace();
+    
+    public void printAll(TSModel model);
 }

@@ -2,7 +2,10 @@ package formula.pathFormula;
 
 import formula.*;
 import formula.stateFormula.*;
+
 import java.util.Set;
+
+import tsmodel.TSState;
 
 public class Until extends PathFormula {
     public final StateFormula left;
@@ -34,5 +37,11 @@ public class Until extends PathFormula {
         right.writeToBuffer(buffer);
         buffer.append(")");
     }
+
+	@Override
+	public boolean isValidState(TSState state, StateFormula sf) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

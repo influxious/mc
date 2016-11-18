@@ -9,6 +9,8 @@ import java.util.ArrayList;
 public class TSModel {
 	
 	ArrayList<TSState> initialStates = new ArrayList<TSState>();
+	public int numberOfStates;
+	
 	
 	
 	public void addInitialState(TSState iState){

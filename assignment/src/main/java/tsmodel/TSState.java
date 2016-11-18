@@ -9,8 +9,10 @@ public class TSState {
     private String name;
     private Set<String> atomicProp;
     private ArrayList<TSTransition> transitions = new ArrayList<TSTransition>();
+    int index;
 
-    public TSState(String name, Set<String> atomicProp){
+    public TSState(int index, String name, Set<String> atomicProp){
+    	this.index = index;
     	this.name = name;
     	this.atomicProp = atomicProp;
     }
@@ -19,7 +21,23 @@ public class TSState {
     	transitions.add(t);
     }
     
-    public ArrayList<TSTransition> getTransitions(){
+    public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
+	}
+
+	public ArrayList<TSTransition> getTransitions(){
     	return transitions;
     }
     
