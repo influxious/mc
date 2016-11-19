@@ -35,17 +35,17 @@
 		{
 			"source": "s0",
 			"target": "s2",
-			"actions": ["act2"]
+			"actions": ["act3"]
 		},
 		{
 			"source": "s1",
 			"target": "s3",
-			"actions": ["act3"]
+			"actions": ["act1"]
 		},
 		{
 			"source": "s3",
 			"target": "s4",
-			"actions": ["act4"]
+			"actions": ["act1"]
 		}
 	]
 }

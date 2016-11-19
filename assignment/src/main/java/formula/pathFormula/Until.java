@@ -81,7 +81,7 @@ public class Until extends PathFormula {
 	public void recursiveTraversalPath(TSState state, boolean[] visited, boolean currentLeft) {
 		if (visited[state.getIndex()]) {
 			return;
-		}		
+		}				 
 		if(!left.isValidState(state)){
 			currentLeft = false;
 			if((!currentLeft) && right.isValidState(state)){

@@ -11,6 +11,7 @@ public class TSState {
     private ArrayList<TSTransition> transitions = new ArrayList<TSTransition>();
     int index;
 
+     
     public TSState(int index, String name, Set<String> atomicProp){
     	this.index = index;
     	this.name = name;
@@ -51,6 +52,7 @@ public class TSState {
     
     @Override
     public String toString() {
+    	System.out.println("building string");
 		StringBuilder sb = new StringBuilder();
 		sb.append("State: "+this.name+"\n");
 		sb.append("Atomic Propositions: ");
@@ -64,8 +66,13 @@ public class TSState {
 		    sb.append("\t -" + name + "-" + transitions.get(i));
 	    }
 	    sb.append("\n");
+	    System.out.println("built string " + sb.toString());
 		return sb.toString();
     }
+
+	public Set<String> getAtomicProp() {
+		return atomicProp;
+	}
 
 
 	

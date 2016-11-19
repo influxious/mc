@@ -13,12 +13,12 @@
 		{
 			"init": false,
 			"name": "s2",
-			"label": ["p"]
+			"label": ["q"]
 		},
 		{
 			"init": false,
 			"name": "s3",
-			"label": ["p"]
+			"label": ["q"]
 		}
 	],
 	"transitions": [

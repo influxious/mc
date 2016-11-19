@@ -202,27 +202,66 @@ public class ModelCheckerTest {
 		}
 	}
 	
+	@Test
+	public void buildAndCheckModel_forAllNext() {
+		try {
+			Model model = Model
+					.parseModel("src/test/resources/my-examples/modelForAllNext.json");
+			TSModel ts = Model.transform(model);
+			StateFormula fairnessConstraint = new FormulaParser(
+					"src/test/resources/constraint1.json").parse();
+			StateFormula query = new FormulaParser(
+					"src/test/resources/my-examples/ctlForAllNext.json").parse();
+			ModelChecker mc = new SimpleModelChecker();
+			assertTrue(mc.check(ts, fairnessConstraint, query));
+		} catch (IOException e) {
+			e.printStackTrace();
+			fail(e.toString());
+		}
+	}
+	
+	@Test
+	public void buildAndCheckModel_thereExistsNext() {
+		try {
+			Model model = Model
+					.parseModel("src/test/resources/my-examples/modelThereExistsNext.json");
+			TSModel ts = Model.transform(model);
+			StateFormula fairnessConstraint = new FormulaParser(
+					"src/test/resources/constraint1.json").parse();
+			StateFormula query = new FormulaParser(
+					"src/test/resources/my-examples/ctlThereExistsNext.json").parse();
+			ModelChecker mc = new SimpleModelChecker();
+			assertTrue(mc.check(ts, fairnessConstraint, query));
+		} catch (IOException e) {
+			e.printStackTrace();
+			fail(e.toString());
+		}
+	}
+	
+		
+	@Test
+	public void buildAndCheckModel() {
+		try {
+			Model model = Model.parseModel("src/test/resources/model2.json");
+			TSModel ts = Model.transform(model);
+
+			 StateFormula fairnessConstraint = new
+			 FormulaParser("src/test/resources/constraint1.json").parse();
+			 StateFormula query = new
+			 FormulaParser("src/test/resources/ctl2.json").parse();
+			 ModelChecker mc = new SimpleModelChecker();
+
+			 assertTrue(mc.check(ts, fairnessConstraint, query));
+		} catch (IOException e) {
+			e.printStackTrace();
+			fail(e.toString());
+		}
+	}
 	
 	
-//	@Test
-//	public void buildAndCheckModel() {
-//		try {
-//			Model model = Model.parseModel("src/test/resources/model1.json");
-//			// TSModel ts = Model.transform(model);
-//
-//			// StateFormula fairnessConstraint = new
-//			// FormulaParser("src/test/resources/constraint1.json").parse();
-//			// StateFormula query = new
-//			// FormulaParser("src/test/resources/ctl2.json").parse();
-//			// ModelChecker mc = new SimpleModelChecker();
-//
-//			// TO IMPLEMENT
-//			// assertTrue(mc.check(model, fairnessConstraint, query));
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//			fail(e.toString());
-//		}
-//	}
+	
+	
+	
 
 //	@Test
 //	public void buildAndCheckModel2() {

@@ -50,22 +50,22 @@
 		{
 			"source": "s1",
 			"target": "s3",
-			"actions": ["act3"]
+			"actions": ["act1"]
 		},
 		{
 			"source": "s3",
 			"target": "s4",
-			"actions": ["act4"]
+			"actions": ["act2"]
 		},
 		{
 			"source": "s5",
 			"target": "s6",
-			"actions": ["act5"]
+			"actions": ["act1"]
 		},
 		{
 			"source": "s6",
 			"target": "s1",
-			"actions": ["act6"]
+			"actions": ["act1"]
 		}
 	]
 }

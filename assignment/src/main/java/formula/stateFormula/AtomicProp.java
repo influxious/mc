@@ -15,7 +15,7 @@ public class AtomicProp extends StateFormula {
     }
     
     @Override
-    public boolean isValidState(TSState state){
+    public boolean isValidState(TSState state){    	
     	return state.containsAtomicProp(label);
     }
     

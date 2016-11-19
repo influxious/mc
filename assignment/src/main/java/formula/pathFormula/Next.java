@@ -14,6 +14,7 @@ public class Next extends PathFormula {
     public final StateFormula stateFormula;
     private Set<String> actions;
     boolean isValid = true;
+    boolean validPath = false;
 
     public Next(StateFormula stateFormula, Set<String> actions) {
         this.stateFormula = stateFormula;
@@ -37,9 +38,8 @@ public class Next extends PathFormula {
 			recursiveTraversal(state, visited);
 			return isValid;
 		} else if(ThereExists.class.isInstance(sf)){
-//			recursiveTraversalPath(state, visited);
-//			return validPath;
-			return true;
+			recursiveTraversalPath(state, visited);
+			return validPath;
 		} else {
 			return false;
 		}
@@ -61,7 +61,21 @@ public class Next extends PathFormula {
 		}
 	} 	
 	
-	
+	public void recursiveTraversalPath(TSState state, boolean[] visited) {
+		if (visited[state.getIndex()]) {
+			return;
+		}		
+		visited[state.getIndex()] = true;
+		ArrayList<TSTransition> transitions = state.getTransitions();
+		for (int i = 0; i < transitions.size(); i++) {
+			TSTransition currentT = transitions.get(i);
+			TSState futureState = currentT.getTarget();
+			if(stateFormula.isValidState(futureState)){
+				validPath = true;
+			}
+			recursiveTraversalPath(futureState, visited);
+		}
+	} 
 	
 
 }

@@ -12,8 +12,6 @@ public abstract class StateFormula {
         return buffer.toString();
     }
     
-    public boolean isValidState(TSState state){
-    	return isValidState(state);
-    }
+    public abstract boolean isValidState(TSState state);
     
 }
