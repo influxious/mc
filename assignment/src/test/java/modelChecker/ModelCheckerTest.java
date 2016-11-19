@@ -184,6 +184,24 @@ public class ModelCheckerTest {
 		}
 	}
 	
+	@Test
+	public void buildAndCheckModel_thereExistsUntil() {
+		try {
+			Model model = Model
+					.parseModel("src/test/resources/my-examples/modelThereExistsUntil.json");
+			TSModel ts = Model.transform(model);
+			StateFormula fairnessConstraint = new FormulaParser(
+					"src/test/resources/constraint1.json").parse();
+			StateFormula query = new FormulaParser(
+					"src/test/resources/my-examples/ctlThereExistsUntil.json").parse();
+			ModelChecker mc = new SimpleModelChecker();
+			assertTrue(mc.check(ts, fairnessConstraint, query));
+		} catch (IOException e) {
+			e.printStackTrace();
+			fail(e.toString());
+		}
+	}
+	
 	
 	
 //	@Test

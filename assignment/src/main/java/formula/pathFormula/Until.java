@@ -86,14 +86,17 @@ public class Until extends PathFormula {
 			currentLeft = false;
 			if((!currentLeft) && right.isValidState(state)){
 				validPath = true;
-			} 
+			}
 		}
 		visited[state.getIndex()] = true;
 		ArrayList<TSTransition> transitions = state.getTransitions();
 		for (int i = 0; i < transitions.size(); i++) {
 			TSTransition currentT = transitions.get(i);
 			TSState futureState = currentT.getTarget();
-			recursiveTraversal(futureState, visited, currentLeft);
+			if((currentLeft) && left.isValidState(futureState)){
+				validPath = true;
+			}
+			recursiveTraversalPath(futureState, visited, currentLeft);
 		}
 	} 
 	
