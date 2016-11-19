@@ -13,17 +13,17 @@
 		{
 			"init": false,
 			"name": "s2",
-			"label": ["q"]
+			"label": ["p"]
 		},
 		{
 			"init": false,
 			"name": "s3",
-			"label": ["q"]
+			"label": ["p"]
 		},
 		{
 			"init": false,
 			"name": "s4",
-			"label": ["r"]
+			"label": ["q"]
 		}
 	],
 	"transitions": [
@@ -38,9 +38,14 @@
 			"actions": ["act2"]
 		},
 		{
-			"source": "s0",
+			"source": "s2",
 			"target": "s3",
 			"actions": ["act3"]
+		},
+		{
+			"source": "s3",
+			"target": "s0",
+			"actions": ["act4"]
 		},
 		{
 			"source": "s3",

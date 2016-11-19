@@ -16,6 +16,7 @@ public class Until extends PathFormula {
     private Set<String> leftActions;
     private Set<String> rightActions;
     private boolean isValid = true;
+    private boolean validPath = false;
 
     public Until(StateFormula left, StateFormula right, Set<String> leftActions, Set<String> rightActions) {
         super();
@@ -49,8 +50,8 @@ public class Until extends PathFormula {
 			recursiveTraversal(state, visited, true);
 			return isValid;
 		} else if(ThereExists.class.isInstance(sf)){
-			///recursiveTraversal(state, visited);
-			return true;
+			recursiveTraversalPath(state, visited, true);
+			return validPath;
 		} else {
 			return false;
 		}
@@ -60,9 +61,7 @@ public class Until extends PathFormula {
 		if (visited[state.getIndex()]) {
 			return;
 		}		
-		if(left.isValidState(state)){
-			isValid = true;
-		} else {
+		if(!left.isValidState(state)){
 			currentLeft = false;
 			if((!currentLeft) && right.isValidState(state)){
 				return;
@@ -79,5 +78,23 @@ public class Until extends PathFormula {
 		}
 	} 
 	
-
+	public void recursiveTraversalPath(TSState state, boolean[] visited, boolean currentLeft) {
+		if (visited[state.getIndex()]) {
+			return;
+		}		
+		if(!left.isValidState(state)){
+			currentLeft = false;
+			if((!currentLeft) && right.isValidState(state)){
+				validPath = true;
+			} 
+		}
+		visited[state.getIndex()] = true;
+		ArrayList<TSTransition> transitions = state.getTransitions();
+		for (int i = 0; i < transitions.size(); i++) {
+			TSTransition currentT = transitions.get(i);
+			TSState futureState = currentT.getTarget();
+			recursiveTraversal(futureState, visited, currentLeft);
+		}
+	} 
+	
 }
