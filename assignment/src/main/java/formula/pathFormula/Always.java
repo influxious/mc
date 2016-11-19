@@ -2,9 +2,7 @@ package formula.pathFormula;
 
 import formula.FormulaParser;
 import formula.stateFormula.*;
-
 import java.util.*;
-
 import tsmodel.TSModel;
 import tsmodel.TSState;
 import tsmodel.TSTransition;
@@ -35,17 +33,17 @@ public class Always extends PathFormula {
 	public boolean isValidState(TSState state, StateFormula sf) {
 		boolean[] visited = new boolean[TSModel.numberOfStates];
 		if(ForAll.class.isInstance(sf)){
-			recursiveTraversal(state, visited, sf);
+			recursiveTraversal(state, visited);
 			return isValid;
 		} else if(ThereExists.class.isInstance(sf)){
-			recursiveTraversalPath(state, visited, sf);
+			recursiveTraversalPath(state, visited);
 			return validPath;
 		} else {
 			return false;
 		}
 	}
 	
-	public void recursiveTraversal(TSState state, boolean[] visited, StateFormula query) {
+	public void recursiveTraversal(TSState state, boolean[] visited) {
 		if (visited[state.getIndex()]) {
 			return;
 		}		
@@ -57,29 +55,26 @@ public class Always extends PathFormula {
 		for (int i = 0; i < transitions.size(); i++) {
 			TSTransition currentT = transitions.get(i);
 			TSState futureState = currentT.getTarget();
-			recursiveTraversal(futureState, visited, query);
+			recursiveTraversal(futureState, visited);
 		}
 	} 	
 	
-	public void recursiveTraversalPath(TSState state, boolean[] visited, StateFormula query) {
+	public void recursiveTraversalPath(TSState state, boolean[] visited) {
 		if (visited[state.getIndex()]) {
 			return;
 		}	
-		System.out.println("State: " + state.getName());
-
 		if(!stateFormula.isValidState(state)){
-			System.out.println("Invalid State");
 			return;
 		} else if(state.getTransitions().size() == 0){
-			System.out.println("Last Valid - TRUE");
 			validPath = true;
+			return;
 		}
 		visited[state.getIndex()] = true;
 		ArrayList<TSTransition> transitions = state.getTransitions();
 		for (int i = 0; i < transitions.size(); i++) {
 			TSTransition currentT = transitions.get(i);
 			TSState futureState = currentT.getTarget();
-			recursiveTraversalPath(futureState, visited, query);
+			recursiveTraversalPath(futureState, visited);
 		}
 	}
 	

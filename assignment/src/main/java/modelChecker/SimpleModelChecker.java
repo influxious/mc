@@ -15,7 +15,7 @@ public class SimpleModelChecker implements ModelChecker {
 	public boolean check(TSModel model, StateFormula constraint,
 			StateFormula query) {
 		ArrayList<TSState> iStates = model.getInitialStates();
-		boolean[] visited = new boolean[model.numberOfStates];
+		//boolean[] visited = new boolean[model.numberOfStates];
 		
 		// System.out.println(states.size());
 		// System.out.println(query);		
