@@ -166,7 +166,25 @@ public class ModelCheckerTest {
 		}
 	}
 	
-	
+	@Test
+	public void buildAndCheckModel_until() {
+		try {
+			Model model = Model
+					.parseModel("src/test/resources/modelUntil.json");
+			TSModel ts = Model.transform(model);
+			StateFormula fairnessConstraint = new FormulaParser(
+					"src/test/resources/constraint1.json").parse();
+			StateFormula query = new FormulaParser(
+					"src/test/resources/ctlUntil.json").parse();
+			System.out.println(query);
+			ModelChecker mc = new SimpleModelChecker();
+			assertTrue(mc.check(ts, fairnessConstraint, query));
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+			fail(e.toString());
+		}
+	}
 	
 	
 	

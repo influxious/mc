@@ -78,43 +78,5 @@ public class Always extends PathFormula {
 		}
 	}
 	
-	
-	
-	
-	
-/*	public void recursiveTraversalExists(TSState state, boolean[] visited, StateFormula query, TSModel model, boolean current) {
-		if (visited[state.getIndex()]) {
-			return;
-		}	
-		System.out.println("State: " + state.getName());
 
-		
-		if(!current){
-			if(stateFormula.isValidState(state, model)){
-				current = true;
-				System.out.println("Valid");
-			} 
-//			if(state.getTransitions().size() == 0){
-//				System.out.println("Last Valid");
-//				//validPath = true
-//			}
-		} else {
-			if(!stateFormula.isValidState(state, model)){
-				System.out.println("Invalid");
-				return;
-
-			} else if(state.getTransitions().size() == 0){
-				System.out.println("Last Valid - TRUE");
-				validPath = true;
-			}
-		}
-	
-		visited[state.getIndex()] = true;
-		ArrayList<TSTransition> transitions = state.getTransitions();
-		for (int i = 0; i < transitions.size(); i++) {
-			TSTransition currentT = transitions.get(i);
-			TSState futureState = currentT.getTarget();
-			recursiveTraversalExists(futureState, visited, query, model, current);
-		}
-	} */
 }

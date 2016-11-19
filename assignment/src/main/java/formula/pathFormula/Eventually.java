@@ -39,6 +39,7 @@ public class Eventually extends PathFormula {
 	@Override
 	public boolean isValidState(TSState state, StateFormula sf) {
 		boolean[] visited = new boolean[TSModel.numberOfStates];
+		
 		if(ForAll.class.isInstance(sf)){
 			recursiveTraversal(state, visited);
 			return allPathsValid;
@@ -51,6 +52,7 @@ public class Eventually extends PathFormula {
 	}
 
 	private void recursiveTraversal(TSState state, boolean[] visited) {
+//		System.out.println(state.getName());
 		if (visited[state.getIndex()]) {
 			return;
 		}		
