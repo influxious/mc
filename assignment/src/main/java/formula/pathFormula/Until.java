@@ -5,6 +5,7 @@ import formula.stateFormula.*;
 
 import java.util.Set;
 
+import tsmodel.TSModel;
 import tsmodel.TSState;
 
 public class Until extends PathFormula {
@@ -39,7 +40,7 @@ public class Until extends PathFormula {
     }
 
 	@Override
-	public boolean isValidState(TSState state, StateFormula sf) {
+	public boolean isValidState(TSState state, StateFormula sf, TSModel model) {
 		// TODO Auto-generated method stub
 		return false;
 	}

@@ -8,7 +8,7 @@
 		{
 			"init": false,
 			"name": "s1",
-			"label": ["p"]
+			"label": ["r"]
 		},
 		{
 			"init": false,
@@ -18,21 +18,11 @@
 		{
 			"init": false,
 			"name": "s3",
-			"label": ["p"]
+			"label": ["r"]
 		},
 		{
 			"init": false,
 			"name": "s4",
-			"label": ["p"]
-		},
-		{
-			"init": true,
-			"name": "s5",
-			"label": ["p","r"]
-		},
-		{
-			"init": false,
-			"name": "s6",
 			"label": ["p"]
 		}
 	],
@@ -56,16 +46,6 @@
 			"source": "s3",
 			"target": "s4",
 			"actions": ["act4"]
-		},
-		{
-			"source": "s5",
-			"target": "s6",
-			"actions": ["act5"]
-		},
-		{
-			"source": "s6",
-			"target": "s1",
-			"actions": ["act6"]
 		}
 	]
 }

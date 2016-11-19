@@ -1,5 +1,6 @@
 package formula.stateFormula;
 
+import tsmodel.TSModel;
 import tsmodel.TSState;
 
 public class AtomicProp extends StateFormula {
@@ -15,8 +16,12 @@ public class AtomicProp extends StateFormula {
     }
     
     @Override
-    public boolean isValidState(TSState state){
+    public boolean isValidState(TSState state, TSModel model){
     	return state.containsAtomicProp(label);
     }
+    
+	
+
+
 
 }

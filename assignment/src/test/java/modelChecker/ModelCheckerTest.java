@@ -22,77 +22,77 @@ public class ModelCheckerTest {
 	 * models and formulas for the mutual exclusion task.
 	 */
 
-//	@Test
-//	public void buildAndCheckModel_atomicP() {
-//		try {
-//			Model model = Model
-//					.parseModel("src/test/resources/modelAtomicP.json");
-//			TSModel ts = Model.transform(model);
-//			StateFormula fairnessConstraint = new FormulaParser(
-//					"src/test/resources/constraint1.json").parse();
-//			StateFormula query = new FormulaParser(
-//					"src/test/resources/ctlAtomicP.json").parse();
-//			ModelChecker mc = new SimpleModelChecker();
-//			assertTrue(mc.check(ts, fairnessConstraint, query));
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//			fail(e.toString());
-//		}
-//	}
-//
-//	@Test
-//	public void buildAndCheckModel_and() {
-//		try {
-//			Model model = Model
-//					.parseModel("src/test/resources/modelAnd.json");
-//			TSModel ts = Model.transform(model);
-//			StateFormula fairnessConstraint = new FormulaParser(
-//					"src/test/resources/constraint1.json").parse();
-//			StateFormula query = new FormulaParser(
-//					"src/test/resources/ctlAnd.json").parse();
-//			ModelChecker mc = new SimpleModelChecker();
-//			assertTrue(mc.check(ts, fairnessConstraint, query));
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//			fail(e.toString());
-//		}
-//	}
-//	
-//	@Test
-//	public void buildAndCheckModel_or() {
-//		try {
-//			Model model = Model
-//					.parseModel("src/test/resources/modelOr.json");
-//			TSModel ts = Model.transform(model);
-//			StateFormula fairnessConstraint = new FormulaParser(
-//					"src/test/resources/constraint1.json").parse();
-//			StateFormula query = new FormulaParser(
-//					"src/test/resources/ctlOr.json").parse();
-//			ModelChecker mc = new SimpleModelChecker();
-//			assertTrue(mc.check(ts, fairnessConstraint, query));
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//			fail(e.toString());
-//		}
-//	}
-//	
-//	@Test
-//	public void buildAndCheckModel_not() {
-//		try {
-//			Model model = Model
-//					.parseModel("src/test/resources/modelNot.json");
-//			TSModel ts = Model.transform(model);
-//			StateFormula fairnessConstraint = new FormulaParser(
-//					"src/test/resources/constraint1.json").parse();
-//			StateFormula query = new FormulaParser(
-//					"src/test/resources/ctlNot.json").parse();
-//			ModelChecker mc = new SimpleModelChecker();
-//			assertTrue(mc.check(ts, fairnessConstraint, query));
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//			fail(e.toString());
-//		}
-//	}
+	@Test
+	public void buildAndCheckModel_atomicP() {
+		try {
+			Model model = Model
+					.parseModel("src/test/resources/modelAtomicP.json");
+			TSModel ts = Model.transform(model);
+			StateFormula fairnessConstraint = new FormulaParser(
+					"src/test/resources/constraint1.json").parse();
+			StateFormula query = new FormulaParser(
+					"src/test/resources/ctlAtomicP.json").parse();
+			ModelChecker mc = new SimpleModelChecker();
+			assertTrue(mc.check(ts, fairnessConstraint, query));
+		} catch (IOException e) {
+			e.printStackTrace();
+			fail(e.toString());
+		}
+	}
+
+	@Test
+	public void buildAndCheckModel_and() {
+		try {
+			Model model = Model
+					.parseModel("src/test/resources/modelAnd.json");
+			TSModel ts = Model.transform(model);
+			StateFormula fairnessConstraint = new FormulaParser(
+					"src/test/resources/constraint1.json").parse();
+			StateFormula query = new FormulaParser(
+					"src/test/resources/ctlAnd.json").parse();
+			ModelChecker mc = new SimpleModelChecker();
+			assertTrue(mc.check(ts, fairnessConstraint, query));
+		} catch (IOException e) {
+			e.printStackTrace();
+			fail(e.toString());
+		}
+	}
+	
+	@Test
+	public void buildAndCheckModel_or() {
+		try {
+			Model model = Model
+					.parseModel("src/test/resources/modelOr.json");
+			TSModel ts = Model.transform(model);
+			StateFormula fairnessConstraint = new FormulaParser(
+					"src/test/resources/constraint1.json").parse();
+			StateFormula query = new FormulaParser(
+					"src/test/resources/ctlOr.json").parse();
+			ModelChecker mc = new SimpleModelChecker();
+			assertTrue(mc.check(ts, fairnessConstraint, query));
+		} catch (IOException e) {
+			e.printStackTrace();
+			fail(e.toString());
+		}
+	}
+	
+	@Test
+	public void buildAndCheckModel_not() {
+		try {
+			Model model = Model
+					.parseModel("src/test/resources/modelNot.json");
+			TSModel ts = Model.transform(model);
+			StateFormula fairnessConstraint = new FormulaParser(
+					"src/test/resources/constraint1.json").parse();
+			StateFormula query = new FormulaParser(
+					"src/test/resources/ctlNot.json").parse();
+			ModelChecker mc = new SimpleModelChecker();
+			assertTrue(mc.check(ts, fairnessConstraint, query));
+		} catch (IOException e) {
+			e.printStackTrace();
+			fail(e.toString());
+		}
+	}
 	
 	@Test
 	public void buildAndCheckModel_forAllAlways() {
@@ -105,7 +105,6 @@ public class ModelCheckerTest {
 			StateFormula query = new FormulaParser(
 					"src/test/resources/ctlForAllAlways.json").parse();
 			ModelChecker mc = new SimpleModelChecker();
-//			mc.printAll(ts);
 			assertTrue(mc.check(ts, fairnessConstraint, query));
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -113,6 +112,32 @@ public class ModelCheckerTest {
 		}
 	}
 
+	@Test
+	public void buildAndCheckModel_thereExistsAlways() {
+		try {
+			Model model = Model
+					.parseModel("src/test/resources/modelThereExistsAlways.json");
+			TSModel ts = Model.transform(model);
+			StateFormula fairnessConstraint = new FormulaParser(
+					"src/test/resources/constraint1.json").parse();
+			StateFormula query = new FormulaParser(
+					"src/test/resources/ctlThereExistsAlways.json").parse();
+			ModelChecker mc = new SimpleModelChecker();
+			assertTrue(mc.check(ts, fairnessConstraint, query));
+		} catch (IOException e) {
+			e.printStackTrace();
+			fail(e.toString());
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 //	@Test
 //	public void buildAndCheckModel() {
 //		try {

@@ -51,7 +51,7 @@ public class Model {
 			sourceState.addTransition(ts);
 		}
 
-		System.out.println("number of states " + index);
+		//System.out.println("number of states " + index);
 		tsmodel.numberOfStates = index;
 		return tsmodel;
 	}
