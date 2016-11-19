@@ -1,6 +1,5 @@
 package formula.stateFormula;
 
-import tsmodel.TSModel;
 import tsmodel.TSState;
 
 public class BoolProp extends StateFormula {
@@ -17,7 +16,7 @@ public class BoolProp extends StateFormula {
     }
 
     @Override
-    public boolean isValidState(TSState state, TSModel model){
+    public boolean isValidState(TSState state){
     	return value;
     } 
 }

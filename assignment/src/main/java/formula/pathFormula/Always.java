@@ -32,24 +32,24 @@ public class Always extends PathFormula {
     }
 
 	@Override
-	public boolean isValidState(TSState state, StateFormula sf, TSModel model) {
-		boolean[] visited = new boolean[model.numberOfStates];
+	public boolean isValidState(TSState state, StateFormula sf) {
+		boolean[] visited = new boolean[TSModel.numberOfStates];
 		if(ForAll.class.isInstance(sf)){
-			recursiveTraversal(state, visited, sf, model);
+			recursiveTraversal(state, visited, sf);
 			return isValid;
 		} else if(ThereExists.class.isInstance(sf)){
-			recursiveTraversalPath(state, visited, sf, model);
+			recursiveTraversalPath(state, visited, sf);
 			return validPath;
 		} else {
 			return false;
 		}
 	}
 	
-	public void recursiveTraversal(TSState state, boolean[] visited, StateFormula query, TSModel model) {
+	public void recursiveTraversal(TSState state, boolean[] visited, StateFormula query) {
 		if (visited[state.getIndex()]) {
 			return;
 		}		
-		if(!stateFormula.isValidState(state, model)){
+		if(!stateFormula.isValidState(state)){
 			isValid = false;
 		} 
 		visited[state.getIndex()] = true;
@@ -57,17 +57,17 @@ public class Always extends PathFormula {
 		for (int i = 0; i < transitions.size(); i++) {
 			TSTransition currentT = transitions.get(i);
 			TSState futureState = currentT.getTarget();
-			recursiveTraversal(futureState, visited, query, model);
+			recursiveTraversal(futureState, visited, query);
 		}
 	} 	
 	
-	public void recursiveTraversalPath(TSState state, boolean[] visited, StateFormula query, TSModel model) {
+	public void recursiveTraversalPath(TSState state, boolean[] visited, StateFormula query) {
 		if (visited[state.getIndex()]) {
 			return;
 		}	
 		System.out.println("State: " + state.getName());
 
-		if(!stateFormula.isValidState(state, model)){
+		if(!stateFormula.isValidState(state)){
 			System.out.println("Invalid State");
 			return;
 		} else if(state.getTransitions().size() == 0){
@@ -79,7 +79,7 @@ public class Always extends PathFormula {
 		for (int i = 0; i < transitions.size(); i++) {
 			TSTransition currentT = transitions.get(i);
 			TSState futureState = currentT.getTarget();
-			recursiveTraversalPath(futureState, visited, query, model);
+			recursiveTraversalPath(futureState, visited, query);
 		}
 	}
 	

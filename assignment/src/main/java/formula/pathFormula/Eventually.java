@@ -5,7 +5,6 @@ import formula.stateFormula.*;
 
 import java.util.*;
 
-import tsmodel.TSModel;
 import tsmodel.TSState;
 
 public class Eventually extends PathFormula {
@@ -36,7 +35,7 @@ public class Eventually extends PathFormula {
     }
 
 	@Override
-	public boolean isValidState(TSState state, StateFormula sf, TSModel model) {
+	public boolean isValidState(TSState state, StateFormula sf) {
 		// TODO Auto-generated method stub
 		return false;
 	}

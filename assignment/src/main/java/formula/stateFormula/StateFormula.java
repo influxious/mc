@@ -11,9 +11,9 @@ public abstract class StateFormula {
         writeToBuffer(buffer);
         return buffer.toString();
     }
-
-    public boolean isValidState(TSState state, TSModel model){
-    	return isValidState(state, model);
+    
+    public boolean isValidState(TSState state){
+    	return isValidState(state);
     }
     
 }

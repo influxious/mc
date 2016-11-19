@@ -1,6 +1,5 @@
 package formula.stateFormula;
 
-import tsmodel.TSModel;
 import tsmodel.TSState;
 import formula.FormulaParser;
 import formula.pathFormula.PathFormula;
@@ -21,8 +20,8 @@ public class ThereExists extends StateFormula {
     }
     
     @Override
-    public boolean isValidState(TSState state, TSModel model){
-    	return pathFormula.isValidState(state, this, model);
+    public boolean isValidState(TSState state){
+    	return pathFormula.isValidState(state, this);
     }
     
 }

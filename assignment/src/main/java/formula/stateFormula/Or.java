@@ -1,6 +1,5 @@
 package formula.stateFormula;
 
-import tsmodel.TSModel;
 import tsmodel.TSState;
 
 public class Or extends StateFormula {
@@ -22,8 +21,8 @@ public class Or extends StateFormula {
     }
 
     @Override
-    public boolean isValidState(TSState state, TSModel model){
-    	if(left.isValidState(state, model) || right.isValidState(state, model)){
+    public boolean isValidState(TSState state){
+    	if(left.isValidState(state) || right.isValidState(state)){
     		return true;
     	} else {
     		return false;

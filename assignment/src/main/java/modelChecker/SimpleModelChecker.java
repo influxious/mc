@@ -22,7 +22,7 @@ public class SimpleModelChecker implements ModelChecker {
 		for (int i = 0; i < iStates.size(); i++) {
 			TSState s = iStates.get(i);
 			
-			if(!query.isValidState(s, model)){
+			if(!query.isValidState(s)){
 				return false;
 			}
 			
