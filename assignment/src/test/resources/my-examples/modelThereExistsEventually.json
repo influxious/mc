@@ -13,17 +13,22 @@
 		{
 			"init": false,
 			"name": "s2",
-			"label": ["r"]
+			"label": ["p"]
 		},
 		{
 			"init": false,
 			"name": "s3",
-			"label": ["r"]
+			"label": ["p"]
 		},
 		{
 			"init": false,
 			"name": "s4",
-			"label": ["p"]
+			"label": ["r"]
+		},
+		{
+			"init": false,
+			"name": "s5",
+			"label": ["r"]
 		}
 	],
 	"transitions": [
@@ -35,7 +40,7 @@
 		{
 			"source": "s0",
 			"target": "s2",
-			"actions": ["act2"]
+			"actions": ["act3"]
 		},
 		{
 			"source": "s1",
@@ -45,7 +50,12 @@
 		{
 			"source": "s3",
 			"target": "s4",
-			"actions": ["act4"]
+			"actions": ["act2"]
+		},
+		{
+			"source": "s2",
+			"target": "s5",
+			"actions": ["act1"]
 		}
 	]
 }

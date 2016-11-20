@@ -44,13 +44,6 @@ public class Always extends PathFormula {
 		}
 	}
 	
-//	public void printActions(){
-//		System.out.println("Action Size: "+actions.size());
-//		Iterator<String> it = actions.iterator();
-//	    while(it.hasNext()){
-//	    	 System.out.println(it.next());
-//	    }
-//	}
 	
 	public boolean validActions(Set<String> act){	
 		Set<String> intersection = new HashSet<String>(actions);
