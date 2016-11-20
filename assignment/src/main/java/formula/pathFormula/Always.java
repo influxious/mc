@@ -46,6 +46,9 @@ public class Always extends PathFormula {
 	
 	
 	public boolean validActions(Set<String> act){	
+		if(actions.size() == 0){
+			return true;
+		}
 		Set<String> intersection = new HashSet<String>(actions);
 		intersection.retainAll(act);
 		return (intersection.size() > 0);

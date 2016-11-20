@@ -4,6 +4,7 @@ import formula.FormulaParser;
 import formula.stateFormula.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
 import tsmodel.TSModel;
@@ -45,6 +46,15 @@ public class Next extends PathFormula {
 		}
 	}
 	
+	public boolean validActions(Set<String> act){	
+		if(actions.size() == 0){
+			return true;
+		}
+		Set<String> intersection = new HashSet<String>(actions);
+		intersection.retainAll(act);
+		return (intersection.size() > 0);
+	}
+	
 	public void recursiveTraversal(TSState state, boolean[] visited) {
 		if (visited[state.getIndex()]) {
 			return;
@@ -54,7 +64,8 @@ public class Next extends PathFormula {
 		for (int i = 0; i < transitions.size(); i++) {
 			TSTransition currentT = transitions.get(i);
 			TSState futureState = currentT.getTarget();
-			if(!stateFormula.isValidState(futureState)){
+			if(!stateFormula.isValidState(futureState) || !validActions(currentT.getActions())){
+				System.out.println("inValid action");
 				isValid = false;
 			}
 			recursiveTraversal(futureState, visited);
@@ -67,10 +78,17 @@ public class Next extends PathFormula {
 		}		
 		visited[state.getIndex()] = true;
 		ArrayList<TSTransition> transitions = state.getTransitions();
+		int numberOfInvalidPaths = 0;
 		for (int i = 0; i < transitions.size(); i++) {
 			TSTransition currentT = transitions.get(i);
 			TSState futureState = currentT.getTarget();
-			if(stateFormula.isValidState(futureState)){
+			if(!stateFormula.isValidState(futureState) || !validActions(currentT.getActions())){
+				numberOfInvalidPaths++;
+				if(numberOfInvalidPaths == transitions.size()){
+					System.out.println("Invalid action");
+					return;
+				}
+			} else if(stateFormula.isValidState(futureState) && validActions(currentT.getActions())){
 				validPath = true;
 			}
 			recursiveTraversalPath(futureState, visited);

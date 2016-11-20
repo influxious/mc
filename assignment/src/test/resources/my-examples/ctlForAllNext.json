@@ -1,3 +1,4 @@
 {
-	"formula": "( AX p )"
+	"formula": "( AbX p )",
+	"b": ["act1"]
 }
