@@ -4,6 +4,7 @@ import formula.*;
 import formula.stateFormula.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
 import tsmodel.TSModel;
@@ -57,23 +58,41 @@ public class Until extends PathFormula {
 		}
 	}
 		
+	public boolean validLeftActions(Set<String> act){	
+		if(leftActions.size() == 0){
+			return true; //No left action specified
+		}
+		Set<String> intersection = new HashSet<String>(leftActions);
+		intersection.retainAll(act);
+		return (intersection.size() > 0);
+	}
+	
+	public boolean validRightActions(Set<String> act){	
+		if(rightActions.size() == 0){
+			return true; //No right action specified
+		}
+		Set<String> intersection = new HashSet<String>(rightActions);
+		intersection.retainAll(act);
+		return (intersection.size() > 0);
+	}
+	
 	public void recursiveTraversal(TSState state, boolean[] visited, boolean currentLeft) {
 		if (visited[state.getIndex()]) {
 			return;
 		}		
-		if(!left.isValidState(state)){
-			currentLeft = false;
-			if((!currentLeft) && right.isValidState(state)){
-				return;
-			} else {
-				isValid = false;
-			}
-		}
 		visited[state.getIndex()] = true;
 		ArrayList<TSTransition> transitions = state.getTransitions();
 		for (int i = 0; i < transitions.size(); i++) {
 			TSTransition currentT = transitions.get(i);
 			TSState futureState = currentT.getTarget();
+			if((currentLeft) && right.isValidState(futureState)){
+				currentLeft = false;
+			} 
+			if((!currentLeft) && right.isValidState(futureState) && validRightActions(currentT.getActions())){
+				continue;
+			} else if((currentLeft) && !validLeftActions(currentT.getActions())){
+				isValid = false;
+			}
 			recursiveTraversal(futureState, visited, currentLeft);
 		}
 	} 
@@ -82,20 +101,22 @@ public class Until extends PathFormula {
 		if (visited[state.getIndex()]) {
 			return;
 		}				 
-		if(!left.isValidState(state)){
-			currentLeft = false;
-			if((!currentLeft) && right.isValidState(state)){
-				validPath = true;
-			}
-		}
 		visited[state.getIndex()] = true;
 		ArrayList<TSTransition> transitions = state.getTransitions();
 		for (int i = 0; i < transitions.size(); i++) {
 			TSTransition currentT = transitions.get(i);
 			TSState futureState = currentT.getTarget();
-			if((currentLeft) && left.isValidState(futureState)){
+			if((currentLeft) && right.isValidState(futureState)){
+				currentLeft = false;
+			} 
+			if((!currentLeft) && right.isValidState(futureState) && validRightActions(currentT.getActions())){
 				validPath = true;
-			}
+				return;
+			} else if((currentLeft) && !validLeftActions(currentT.getActions())){
+				return;
+			} else if((currentLeft) && left.isValidState(futureState) && visited[futureState.getIndex()]){
+				validPath = true;
+			} 
 			recursiveTraversalPath(futureState, visited, currentLeft);
 		}
 	} 

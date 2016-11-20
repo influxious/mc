@@ -44,7 +44,6 @@ public class Eventually extends PathFormula {
 			recursiveTraversal(state, visited);
 			return allPathsValid;
 		} else if(ThereExists.class.isInstance(sf)){
-			System.out.println("*******");
 			recursiveTraversalPath(state, visited);
 			return validPath;
 		} else {
@@ -71,7 +70,6 @@ public class Eventually extends PathFormula {
 		}
 		Set<String> intersection = new HashSet<String>(leftActions);
 		intersection.retainAll(act);
-		System.out.println("intersection 1: " +intersection.size());
 		return (intersection.size() > 0);
 	}
 	
@@ -81,7 +79,6 @@ public class Eventually extends PathFormula {
 		}
 		Set<String> intersection = new HashSet<String>(rightActions);
 		intersection.retainAll(act);
-		System.out.println("intersection: " +intersection.size());
 		return (intersection.size() > 0);
 	}
 
@@ -103,7 +100,7 @@ public class Eventually extends PathFormula {
 				allPathsValid = false;
 			}
 			recursiveTraversal(futureState, visited);
-		}
+		} 
 	}
 
 	private void recursiveTraversalPath(TSState state, boolean[] visited) {
@@ -119,7 +116,6 @@ public class Eventually extends PathFormula {
 		for (int i = 0; i < transitions.size(); i++) {
 			TSTransition currentT = transitions.get(i);
 			TSState futureState = currentT.getTarget();
-			System.out.println(state.getName() + " -> " + futureState.getName());
 			if(stateFormula.isValidState(futureState) && validRightActions(currentT.getActions())){
 				validPath = true;
 				return;

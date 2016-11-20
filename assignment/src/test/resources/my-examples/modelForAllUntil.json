@@ -3,17 +3,17 @@
 		{
 			"init": true,
 			"name": "s0",
-			"label": ["p"]
+			"label": ["r"]
 		},
 		{
 			"init": false,
 			"name": "s1",
-			"label": ["p"]
+			"label": ["r"]
 		},
 		{
 			"init": false,
 			"name": "s2",
-			"label": ["p"]
+			"label": ["r"]
 		},
 		{
 			"init": false,
@@ -23,6 +23,11 @@
 		{
 			"init": false,
 			"name": "s4",
+			"label": ["p"]
+		},
+		{
+			"init": false,
+			"name": "s5",
 			"label": ["q"]
 		}
 	],
@@ -35,22 +40,22 @@
 		{
 			"source": "s1",
 			"target": "s2",
-			"actions": ["act2"]
+			"actions": ["act1"]
 		},
 		{
 			"source": "s2",
-			"target": "s3",
-			"actions": ["act3"]
-		},
-		{
-			"source": "s3",
-			"target": "s0",
-			"actions": ["act4"]
-		},
-		{
-			"source": "s3",
 			"target": "s4",
-			"actions": ["act4"]
+			"actions": ["act2"]
+		},
+		{
+			"source": "s1",
+			"target": "s3",
+			"actions": ["act2"]
+		},
+		{
+			"source": "s3",
+			"target": "s5",
+			"actions": ["act3"]
 		}
 	]
 }

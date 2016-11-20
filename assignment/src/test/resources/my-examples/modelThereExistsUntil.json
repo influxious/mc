@@ -3,27 +3,27 @@
 		{
 			"init": true,
 			"name": "s0",
-			"label": ["p"]
+			"label": ["r"]
 		},
 		{
 			"init": false,
 			"name": "s1",
-			"label": ["p"]
+			"label": ["r"]
 		},
 		{
 			"init": false,
 			"name": "s2",
-			"label": ["p"]
+			"label": ["r"]
 		},
 		{
 			"init": false,
 			"name": "s3",
-			"label": ["p"]
+			"label": ["r"]
 		},
 		{
 			"init": false,
 			"name": "s4",
-			"label": ["r"]
+			"label": ["w"]
 		}
 	],
 	"transitions": [
@@ -35,22 +35,22 @@
 		{
 			"source": "s1",
 			"target": "s2",
-			"actions": ["act2"]
+			"actions": ["act1"]
 		},
 		{
 			"source": "s2",
 			"target": "s3",
-			"actions": ["act3"]
+			"actions": ["act1"]
 		},
 		{
 			"source": "s3",
-			"target": "s0",
-			"actions": ["act4"]
+			"target": "s1",
+			"actions": ["act1"]
 		},
 		{
 			"source": "s3",
 			"target": "s4",
-			"actions": ["act4"]
+			"actions": ["act1"]
 		}
 	]
 }
