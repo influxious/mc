@@ -3,11 +3,8 @@
 		{
 			"init": true,
 			"name": "s0",
-			"label": ["p"]
+			"label": ["p", "q"]
 		}
 	],
-	"transitions": [
-		
-
-	]
+	"transitions": []
 }

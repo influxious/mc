@@ -10,6 +10,7 @@ public class TSState {
     private Set<String> atomicProp;
     private ArrayList<TSTransition> transitions = new ArrayList<TSTransition>();
     int index;
+    boolean fairness;
 
      
     public TSState(int index, String name, Set<String> atomicProp){
@@ -70,6 +71,14 @@ public class TSState {
 
 	public Set<String> getAtomicProp() {
 		return atomicProp;
+	}
+
+	public boolean isFairness() {
+		return fairness;
+	}
+
+	public void setFairness(boolean fairness) {
+		this.fairness = fairness;
 	}
 
 

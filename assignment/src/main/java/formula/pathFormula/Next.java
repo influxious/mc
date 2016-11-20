@@ -2,11 +2,8 @@ package formula.pathFormula;
 
 import formula.FormulaParser;
 import formula.stateFormula.*;
-
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Set;
-
 import tsmodel.TSModel;
 import tsmodel.TSState;
 import tsmodel.TSTransition;
@@ -14,8 +11,10 @@ import tsmodel.TSTransition;
 public class Next extends PathFormula {
     public final StateFormula stateFormula;
     private Set<String> actions;
-    boolean isValid = true;
-    boolean validPath = false;
+    
+    private boolean validAll = true;
+    private boolean validPath = false;
+    private boolean allPaths;
 
     public Next(StateFormula stateFormula, Set<String> actions) {
         this.stateFormula = stateFormula;
@@ -34,66 +33,61 @@ public class Next extends PathFormula {
 
 	@Override
 	public boolean isValidState(TSState state, StateFormula sf) {
-		boolean[] visited = new boolean[TSModel.numberOfStates];
 		if(ForAll.class.isInstance(sf)){
-			recursiveTraversal(state, visited);
-			return isValid;
-		} else if(ThereExists.class.isInstance(sf)){
-			recursiveTraversalPath(state, visited);
+			allPaths = true;
+			traversal(state);
+			return validAll;
+		} else { /* There exists */
+			allPaths = false;
+			traversal(state);
 			return validPath;
-		} else {
-			return false;
 		}
 	}
 	
-	public boolean validActions(Set<String> act){	
-		if(actions.size() == 0){
-			return true;
+	public void traversal(TSState state) {
+		if (TSModel.visited[state.getIndex()]) {
+			return; /* Every state will only be visited once */
+		} 
+		TSModel.visited[state.getIndex()] = true;
+		
+		ArrayList<TSTransition> transitions = state.getTransitions();
+		for (int i = 0; i < transitions.size(); i++) {
+			TSTransition currentT = transitions.get(i);
+			if (allPaths) { /* Either all paths or one path */
+				allPaths(currentT);
+			} else {
+				somePaths(currentT);
+			}
 		}
-		Set<String> intersection = new HashSet<String>(actions);
-		intersection.retainAll(act);
-		return (intersection.size() > 0);
 	}
 	
-	public void recursiveTraversal(TSState state, boolean[] visited) {
-		if (visited[state.getIndex()]) {
-			return;
-		}		
-		visited[state.getIndex()] = true;
-		ArrayList<TSTransition> transitions = state.getTransitions();
-		for (int i = 0; i < transitions.size(); i++) {
-			TSTransition currentT = transitions.get(i);
-			TSState futureState = currentT.getTarget();
-			if(!stateFormula.isValidState(futureState) || !validActions(currentT.getActions())){
-				System.out.println("inValid action");
-				isValid = false;
-			}
-			recursiveTraversal(futureState, visited);
-		}
-	} 	
+	public void allPaths(TSTransition currentT){
+		TSState futureState = currentT.getTarget();
 	
-	public void recursiveTraversalPath(TSState state, boolean[] visited) {
-		if (visited[state.getIndex()]) {
-			return;
-		}		
-		visited[state.getIndex()] = true;
-		ArrayList<TSTransition> transitions = state.getTransitions();
-		int numberOfInvalidPaths = 0;
-		for (int i = 0; i < transitions.size(); i++) {
-			TSTransition currentT = transitions.get(i);
-			TSState futureState = currentT.getTarget();
-			if(!stateFormula.isValidState(futureState) || !validActions(currentT.getActions())){
-				numberOfInvalidPaths++;
-				if(numberOfInvalidPaths == transitions.size()){
-					System.out.println("Invalid action");
-					return;
-				}
-			} else if(stateFormula.isValidState(futureState) && validActions(currentT.getActions())){
-				validPath = true;
-			}
-			recursiveTraversalPath(futureState, visited);
+		if(foundInvalidPath(currentT, futureState)){
+			validAll = false;
 		}
-	} 
+		traversal(futureState);
+	}
 	
-
+	public void somePaths(TSTransition currentT){
+		TSState futureState = currentT.getTarget();
+		
+		if(foundInvalidPath(currentT, futureState)){
+			return;
+		} else if(foundValidPath(currentT, futureState)){
+			validPath = true;
+		}
+		traversal(futureState);
+	}
+	
+	
+	public boolean foundInvalidPath(TSTransition currentT, TSState futureState){
+		return ((!stateFormula.isValidState(futureState)) || !currentT.validActions(actions));
+	}
+	
+	public boolean foundValidPath(TSTransition currentT, TSState futureState){
+		return (stateFormula.isValidState(futureState) && currentT.validActions(actions));
+	}
+	
 }

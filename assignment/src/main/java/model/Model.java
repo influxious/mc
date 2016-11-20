@@ -53,6 +53,7 @@ public class Model {
 
 		//System.out.println("number of states " + index);
 		tsmodel.numberOfStates = index;
+		tsmodel.visited = new boolean[index];
 		return tsmodel;
 	}
 

@@ -10,6 +10,7 @@ public class TSModel {
 	
 	ArrayList<TSState> initialStates = new ArrayList<TSState>();
 	public static int numberOfStates;
+	public static boolean[] visited;
 	
 	
 	

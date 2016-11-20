@@ -3,11 +3,9 @@
 		{
 			"init": true,
 			"name": "s0",
-			"label": ["p", "q"]
+			"label": ["p"]
 		}
-	],
-	"transitions": [
-		
-
 	]
+	,
+	"transitions": []
 }
