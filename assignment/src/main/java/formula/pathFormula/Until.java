@@ -70,28 +70,33 @@ public class Until extends PathFormula {
 			return; /* Every state will only be visited once */
 		} 
 		TSModel.visited[state.getIndex()] = true;
-		
 		ArrayList<TSTransition> transitions = state.getTransitions();
 		for (int i = 0; i < transitions.size(); i++) {
 			TSTransition currentT = transitions.get(i);
 			if (allPaths) { /* Either all paths or one path */
-				allPaths(currentT, stack);
+				allPaths(state, currentT, stack);
 			} else {
 				somePaths(currentT, stack);
 			}
 		}
 	}
 	
-	public void allPaths(TSTransition currentT, Stack<String> stack){
+	public void allPaths(TSState state, TSTransition currentT, Stack<String> stack){
 		TSState futureState = currentT.getTarget();
-		
 		if(foundValidPath(currentT, futureState, stack)){
 			return; /* look at other paths */
-		} else if(invalidAction(currentT)){
+		} else
+		if(foundInvalidPath(currentT, stack)){
 			validAll = false;
+			stack.push("Invalid state found at " + futureState.getName());
+			stack.push(state.getName() + " --" + currentT.printActions() + "--> " + futureState.getName());
 			return;
 		}
 		traversal(futureState, stack);
+		if(!validAll){
+			stack.push(state.getName() + " --" + currentT.printActions() + "--> " + futureState.getName());
+			return;
+		}
 	}
 
 	public void somePaths(TSTransition currentT, Stack<String> stack){
@@ -99,7 +104,7 @@ public class Until extends PathFormula {
 		
 		if(foundValidPath(currentT, futureState, stack)){
 			validPath = true;
-		} else if(invalidAction(currentT)){
+		} else if(foundInvalidPath(currentT, stack)){
 			return; /* look at other paths */
 		} else if(handleLoop(futureState, stack)){
 			validPath = true; 
@@ -110,11 +115,14 @@ public class Until extends PathFormula {
 	public boolean foundValidPath(TSTransition currentT, TSState futureState, Stack<String> stack){
 		if((checkingLeft) && right.isValidState(futureState, stack)){
 			checkingLeft = false;
+		} 
+		if(foundInvalidPath(currentT, stack)){
+			return false;
 		} return currentT.validActions(rightActions);
 	}
 	
-	public boolean invalidAction(TSTransition currentT){
-		return ((checkingLeft) && !currentT.validActions(leftActions));
+	public boolean foundInvalidPath(TSTransition currentT, Stack<String> stack){
+		return (((checkingLeft) && !currentT.validActions(leftActions)) || ((checkingLeft) && !left.isValidState(currentT.getTarget(), stack)));
 	}
 	
 	public boolean handleLoop(TSState futureState, Stack<String> stack){

@@ -62,21 +62,27 @@ public class Next extends PathFormula {
 		for (int i = 0; i < transitions.size(); i++) {
 			TSTransition currentT = transitions.get(i);
 			if (allPaths) { /* Either all paths or one path */
-				allPaths(currentT, stack);
+				allPaths(state, currentT, stack);
 			} else {
 				somePaths(currentT, stack);
 			}
 		}
 	}
 	
-	public void allPaths(TSTransition currentT, Stack<String> stack){
+	public void allPaths(TSState state, TSTransition currentT, Stack<String> stack){
 		TSState futureState = currentT.getTarget();
 	
 		if(foundInvalidPath(currentT, futureState, stack)){
 			validAll = false;
+			stack.push("Invalid state found at " + futureState.getName());
+			stack.push(state.getName() + " --" + currentT.printActions() + "--> " + futureState.getName());
 			return;
 		}
 		traversal(futureState, stack);
+		if(!validAll){
+			stack.push(state.getName() + " --" + currentT.printActions() + "--> " + futureState.getName());
+			return;
+		}
 	}
 	
 	public void somePaths(TSTransition currentT, Stack<String> stack){

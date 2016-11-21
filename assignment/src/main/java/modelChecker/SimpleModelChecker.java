@@ -22,9 +22,7 @@ public class SimpleModelChecker implements ModelChecker {
 				getTrace();
 				return false;
 			}
-			
-			
-			
+
 			if(!constraint.passConstraint(s)){
 				return false;
 			}

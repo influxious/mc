@@ -15,7 +15,7 @@ import model.Model;
 
 public class ModelCheckerTest {
 
-/*
+
 	@Test
 	public void buildAndCheckModel_atomicP() {
 		try {
@@ -89,7 +89,7 @@ public class ModelCheckerTest {
 			fail(e.toString());
 		}
 	}
-*/
+
 
 	@Test
 	public void buildAndCheckModel_forAllAlways() {
@@ -108,7 +108,7 @@ public class ModelCheckerTest {
 			fail(e.toString());
 		}
 	}
-/*
+
 	@Test
 	public void buildAndCheckModel_thereExistsAlways() {
 		try {
@@ -235,7 +235,7 @@ public class ModelCheckerTest {
 		}
 	}
 	
-		
+	/*	
 	@Test
 	public void buildAndCheckModel_examples() {
 		try {
@@ -254,7 +254,7 @@ public class ModelCheckerTest {
 			fail(e.toString());
 		}
 	}
-	*/
+*/
 	
 	
 
