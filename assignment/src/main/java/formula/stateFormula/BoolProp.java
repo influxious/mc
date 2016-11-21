@@ -1,5 +1,7 @@
 package formula.stateFormula;
 
+import java.util.Stack;
+
 import tsmodel.TSState;
 
 public class BoolProp extends StateFormula {
@@ -16,7 +18,12 @@ public class BoolProp extends StateFormula {
     }
 
     @Override
-    public boolean isValidState(TSState state){
+    public boolean isValidState(TSState state, Stack<String> stack){
     	return value;
     } 
+    
+    @Override
+    public boolean passConstraint(TSState state){
+    	return value;
+    }
 }

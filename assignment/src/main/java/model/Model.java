@@ -5,12 +5,9 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-
 import tsmodel.*;
-
 import com.google.gson.Gson;
 
 /**
@@ -23,6 +20,7 @@ public class Model {
 	public static Model parseModel(String filePath) throws IOException {
 		Gson gson = new Gson();
 		Model model = gson.fromJson(new FileReader(filePath), Model.class);
+		
 		return model;
 	}
 
@@ -52,8 +50,8 @@ public class Model {
 		}
 
 		//System.out.println("number of states " + index);
-		tsmodel.numberOfStates = index;
-		tsmodel.visited = new boolean[index];
+		TSModel.numberOfStates = index;
+		TSModel.visited = new boolean[index];
 		return tsmodel;
 	}
 

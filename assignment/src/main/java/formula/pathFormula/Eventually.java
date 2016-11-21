@@ -40,19 +40,24 @@ public class Eventually extends PathFormula {
     }
 
 	@Override
-	public boolean isValidState(TSState state, StateFormula sf) {
+	public boolean isValidState(TSState state, StateFormula sf, Stack<String> stack) {
 		if(ForAll.class.isInstance(sf)){
 			allPaths = true;
-			traversal(state);
+			traversal(state, stack);
 			return validAll;
 		} else { /* There exists */
 			allPaths = false;
-			traversal(state);
+			traversal(state, stack);
 			return validPath;
 		}
 	}
 	
-	public void traversal(TSState state) {
+	@Override
+    public boolean passConstraint(TSState state, StateFormula sf){
+		return true;
+    }
+	
+	public void traversal(TSState state, Stack<String> stack) {
 		if (TSModel.visited[state.getIndex()]) {
 			return; /* Every state will only be visited once */
 		} 
@@ -62,39 +67,40 @@ public class Eventually extends PathFormula {
 		for (int i = 0; i < transitions.size(); i++) {
 			TSTransition currentT = transitions.get(i);
 			if (allPaths) { /* Either all paths or one path */
-				allPaths(currentT);
+				allPaths(currentT, stack);
 			} else {
-				somePaths(currentT);
+				somePaths(currentT, stack);
 			}
 		}
 	}
 
-	public void allPaths(TSTransition currentT){
+	public void allPaths(TSTransition currentT, Stack<String> stack){
 		TSState futureState = currentT.getTarget();
-		if(foundValidPath(currentT, futureState)){
+		if(foundValidPath(currentT, futureState, stack)){
 			return; /* look at other paths */
-		} else if(foundInvalidPath(currentT, futureState)){
+		} else if(foundInvalidPath(currentT, futureState, stack)){
 			validAll = false;
-		}
-		traversal(futureState);
-	}
-	
-	public void somePaths(TSTransition currentT){
-		TSState futureState = currentT.getTarget();
-		if(foundValidPath(currentT, futureState)){
-			validPath = true;
-		} else if(foundInvalidPath(currentT, futureState)){
 			return;
 		}
-		traversal(futureState);
-	}
-
-	public boolean foundValidPath(TSTransition currentT, TSState futureState){
-		return (stateFormula.isValidState(futureState) && currentT.validActions(rightActions));
+		traversal(futureState, stack);
 	}
 	
-	public boolean foundInvalidPath(TSTransition currentT, TSState futureState){
-		return (!stateFormula.isValidState(futureState) && !currentT.validActions(leftActions));
+	public void somePaths(TSTransition currentT, Stack<String> stack){
+		TSState futureState = currentT.getTarget();
+		if(foundValidPath(currentT, futureState, stack)){
+			validPath = true;
+		} else if(foundInvalidPath(currentT, futureState, stack)){
+			return;
+		}
+		traversal(futureState, stack);
+	}
+
+	public boolean foundValidPath(TSTransition currentT, TSState futureState, Stack<String> stack){
+		return (stateFormula.isValidState(futureState, stack) && currentT.validActions(rightActions));
+	}
+	
+	public boolean foundInvalidPath(TSTransition currentT, TSState futureState, Stack<String> stack){
+		return (!stateFormula.isValidState(futureState, stack) && !currentT.validActions(leftActions));
 	}
 
 	

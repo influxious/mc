@@ -1,8 +1,9 @@
 package modelChecker;
 
+import java.util.Set;
+
 import tsmodel.TSModel;
 import formula.stateFormula.StateFormula;
-import model.Model;
 
 /**
  * Defines the interface to model checker.
@@ -26,7 +27,7 @@ public interface ModelChecker {
     public boolean check(TSModel model, StateFormula constraint, StateFormula query);
 
     // Returns a trace of the previous check attempt if it failed.
-    public String[] getTrace();
+    public void getTrace();
     
     public void printAll(TSModel model);
 }

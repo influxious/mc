@@ -1,5 +1,7 @@
 package formula.stateFormula;
 
+import java.util.Stack;
+
 import tsmodel.TSState;
 import formula.FormulaParser;
 
@@ -19,12 +21,17 @@ public class Not extends StateFormula {
     }
 
     @Override
-    public boolean isValidState(TSState state){
-    	if (stateFormula.isValidState(state)){
+    public boolean isValidState(TSState state, Stack<String> stack){
+    	if (stateFormula.isValidState(state, stack)){
     		return false;
     	} else {
     		return true;
     	}
+    }
+    
+    @Override
+    public boolean passConstraint(TSState state){
+    	return stateFormula.passConstraint(state);
     }
     
 }

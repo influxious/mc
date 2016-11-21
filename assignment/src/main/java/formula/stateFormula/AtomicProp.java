@@ -1,5 +1,7 @@
 package formula.stateFormula;
 
+import java.util.Stack;
+
 import tsmodel.TSState;
 
 public class AtomicProp extends StateFormula {
@@ -15,10 +17,14 @@ public class AtomicProp extends StateFormula {
     }
     
     @Override
-    public boolean isValidState(TSState state){    	
+    public boolean isValidState(TSState state, Stack<String> stack){    	
     	return state.containsAtomicProp(label);
     }
     
+    @Override
+    public boolean passConstraint(TSState state){
+    	return state.containsAtomicProp(label);
+    }
 	
 
 

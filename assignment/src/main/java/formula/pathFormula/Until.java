@@ -2,8 +2,11 @@ package formula.pathFormula;
 
 import formula.*;
 import formula.stateFormula.*;
+
 import java.util.ArrayList;
 import java.util.Set;
+import java.util.Stack;
+
 import tsmodel.TSModel;
 import tsmodel.TSState;
 import tsmodel.TSTransition;
@@ -45,19 +48,24 @@ public class Until extends PathFormula {
     }
 
 	@Override
-	public boolean isValidState(TSState state, StateFormula sf) {
+	public boolean isValidState(TSState state, StateFormula sf, Stack<String> stack) {
 		if(ForAll.class.isInstance(sf)){
 			allPaths = true;
-			traversal(state);
+			traversal(state, stack);
 			return validAll;
 		} else { /* There exists */
 			allPaths = false;
-			traversal(state);
+			traversal(state, stack);
 			return validPath;
 		}
 	}
 	
-	public void traversal(TSState state) {
+	@Override
+    public boolean passConstraint(TSState state, StateFormula sf){
+		return true;
+    }
+	
+	public void traversal(TSState state, Stack<String> stack) {
 		if (TSModel.visited[state.getIndex()]) {
 			return; /* Every state will only be visited once */
 		} 
@@ -67,39 +75,40 @@ public class Until extends PathFormula {
 		for (int i = 0; i < transitions.size(); i++) {
 			TSTransition currentT = transitions.get(i);
 			if (allPaths) { /* Either all paths or one path */
-				allPaths(currentT);
+				allPaths(currentT, stack);
 			} else {
-				somePaths(currentT);
+				somePaths(currentT, stack);
 			}
 		}
 	}
 	
-	public void allPaths(TSTransition currentT){
+	public void allPaths(TSTransition currentT, Stack<String> stack){
 		TSState futureState = currentT.getTarget();
 		
-		if(foundValidPath(currentT, futureState)){
+		if(foundValidPath(currentT, futureState, stack)){
 			return; /* look at other paths */
 		} else if(invalidAction(currentT)){
 			validAll = false;
+			return;
 		}
-		traversal(futureState);
+		traversal(futureState, stack);
 	}
 
-	public void somePaths(TSTransition currentT){
+	public void somePaths(TSTransition currentT, Stack<String> stack){
 		TSState futureState = currentT.getTarget();
 		
-		if(foundValidPath(currentT, futureState)){
+		if(foundValidPath(currentT, futureState, stack)){
 			validPath = true;
 		} else if(invalidAction(currentT)){
 			return; /* look at other paths */
-		} else if(handleLoop(futureState)){
+		} else if(handleLoop(futureState, stack)){
 			validPath = true; 
 		}
-		traversal(futureState);
+		traversal(futureState, stack);
 	}
 
-	public boolean foundValidPath(TSTransition currentT, TSState futureState){
-		if((checkingLeft) && right.isValidState(futureState)){
+	public boolean foundValidPath(TSTransition currentT, TSState futureState, Stack<String> stack){
+		if((checkingLeft) && right.isValidState(futureState, stack)){
 			checkingLeft = false;
 		} return currentT.validActions(rightActions);
 	}
@@ -108,8 +117,8 @@ public class Until extends PathFormula {
 		return ((checkingLeft) && !currentT.validActions(leftActions));
 	}
 	
-	public boolean handleLoop(TSState futureState){
-		return ((checkingLeft) && left.isValidState(futureState) && TSModel.visited[futureState.getIndex()]);
+	public boolean handleLoop(TSState futureState, Stack<String> stack){
+		return ((checkingLeft) && left.isValidState(futureState, stack) && TSModel.visited[futureState.getIndex()]);
 	}	
 	
 }

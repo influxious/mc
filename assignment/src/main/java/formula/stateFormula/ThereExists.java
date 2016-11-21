@@ -1,5 +1,7 @@
 package formula.stateFormula;
 
+import java.util.Stack;
+
 import tsmodel.TSState;
 import formula.FormulaParser;
 import formula.pathFormula.PathFormula;
@@ -20,8 +22,13 @@ public class ThereExists extends StateFormula {
     }
     
     @Override
-    public boolean isValidState(TSState state){
-    	return pathFormula.isValidState(state, this);
+    public boolean isValidState(TSState state, Stack<String> stack){
+    	return pathFormula.isValidState(state, this, stack);
+    }
+    
+    @Override
+    public boolean passConstraint(TSState state){
+    	return pathFormula.passConstraint(state, this);
     }
     
 }

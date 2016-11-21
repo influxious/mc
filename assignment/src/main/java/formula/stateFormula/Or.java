@@ -1,5 +1,7 @@
 package formula.stateFormula;
 
+import java.util.Stack;
+
 import tsmodel.TSState;
 
 public class Or extends StateFormula {
@@ -21,8 +23,17 @@ public class Or extends StateFormula {
     }
 
     @Override
-    public boolean isValidState(TSState state){
-    	if(left.isValidState(state) || right.isValidState(state)){
+    public boolean isValidState(TSState state, Stack<String> stack){
+    	if(left.isValidState(state, stack) || right.isValidState(state, stack)){
+    		return true;
+    	} else {
+    		return false;
+    	}
+    }
+    
+    @Override
+    public boolean passConstraint(TSState state){
+    	if(left.passConstraint(state) || right.passConstraint(state)){
     		return true;
     	} else {
     		return false;

@@ -1,5 +1,7 @@
 package formula.stateFormula;
 
+import java.util.Stack;
+
 import tsmodel.*;
 
 public abstract class StateFormula {
@@ -12,6 +14,7 @@ public abstract class StateFormula {
         return buffer.toString();
     }
     
-    public abstract boolean isValidState(TSState state);
-    
+    public abstract boolean isValidState(TSState state, Stack<String> stack);
+ 
+    public abstract boolean passConstraint(TSState state);
 }

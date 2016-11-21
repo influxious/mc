@@ -43,6 +43,21 @@ public class  TSTransition {
 			return sb.toString();
 	 }  
     
+	 public String printActions(){
+			StringBuilder sb = new StringBuilder();
+		    sb.append("[");
+		    int i=1;
+			Iterator<String> it = actions.iterator();
+		    while(it.hasNext()){
+		    	if(i==actions.size()){
+		    		sb.append(it.next());
+		    	} else {
+			    	 sb.append(it.next()+ ",");
+		    	}
+		    }
+		    sb.append("]");
+			return sb.toString();
+		}
     
     
 
