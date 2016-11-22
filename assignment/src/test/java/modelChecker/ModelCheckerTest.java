@@ -98,7 +98,7 @@ public class ModelCheckerTest {
 					.parseModel("src/test/resources/my-examples/model/modelForAllAlways.json");
 			TSModel ts = Model.transform(model);
 			StateFormula fairnessConstraint = new FormulaParser(
-					"src/test/resources/constraint1.json").parse();
+					"src/test/resources/my-examples/constraint/cForAllAlways.json").parse();
 			StateFormula query = new FormulaParser(
 					"src/test/resources/my-examples/ctl/ctlForAllAlways.json").parse();
 			ModelChecker mc = new SimpleModelChecker();
@@ -109,6 +109,7 @@ public class ModelCheckerTest {
 		}
 	}
 
+
 	@Test
 	public void buildAndCheckModel_thereExistsAlways() {
 		try {
@@ -116,7 +117,7 @@ public class ModelCheckerTest {
 					.parseModel("src/test/resources/my-examples/model/modelThereExistsAlways.json");
 			TSModel ts = Model.transform(model);
 			StateFormula fairnessConstraint = new FormulaParser(
-					"src/test/resources/constraint1.json").parse();
+					"src/test/resources/my-examples/constraint/cThereExistsAlways.json").parse();
 			StateFormula query = new FormulaParser(
 					"src/test/resources/my-examples/ctl/ctlThereExistsAlways.json").parse();
 			ModelChecker mc = new SimpleModelChecker();
@@ -127,6 +128,7 @@ public class ModelCheckerTest {
 		}
 	}
 	
+	
 	@Test
 	public void buildAndCheckModel_forAllEventually() {
 		try {
@@ -134,7 +136,7 @@ public class ModelCheckerTest {
 					.parseModel("src/test/resources/my-examples/model/modelForAllEventually.json");
 			TSModel ts = Model.transform(model);
 			StateFormula fairnessConstraint = new FormulaParser(
-					"src/test/resources/constraint1.json").parse();
+					"src/test/resources/my-examples/constraint/cForAllEventually.json").parse();
 			StateFormula query = new FormulaParser(
 					"src/test/resources/my-examples/ctl/ctlForAllEventually.json").parse();
 			ModelChecker mc = new SimpleModelChecker();
@@ -144,7 +146,7 @@ public class ModelCheckerTest {
 			fail(e.toString());
 		}
 	}
-	
+	/*
 	@Test
 	public void buildAndCheckModel_thereExistsEventually() {
 		try {
@@ -235,7 +237,7 @@ public class ModelCheckerTest {
 		}
 	}
 	
-	/*	
+		
 	@Test
 	public void buildAndCheckModel_examples() {
 		try {

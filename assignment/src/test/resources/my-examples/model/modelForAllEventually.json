@@ -23,7 +23,7 @@
 		{
 			"init": false,
 			"name": "s4",
-			"label": ["p"]
+			"label": ["x"]
 		},
 		{
 			"init": false,
@@ -60,7 +60,7 @@
 		{
 			"source": "s2",
 			"target": "s5",
-			"actions": ["act3"]
+			"actions": ["act4"]
 		},
 		{
 			"source": "s2",

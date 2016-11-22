@@ -54,9 +54,47 @@ public class Eventually extends PathFormula {
 	
 	@Override
     public boolean passConstraint(TSState state, StateFormula sf){
+		traversalConstraint(state);
 		return true;
     }
 	
+	public void traversalConstraint(TSState state) {
+		if (!TSModel.visited[state.getIndex()]) {
+			return; 
+		}
+		TSModel.visited[state.getIndex()] = false;
+		System.out.println("State "+state.getName()+ " is now false " + state.getIndex());
+		ArrayList<TSTransition> transitions = state.getTransitions();
+		for (int i = 0; i < transitions.size(); i++) {
+			TSTransition currentT = transitions.get(i);
+			
+			if(foundValidPath(currentT)){
+				for(int j=0; j<state.getTransitions().size(); j++){
+					TSTransition future = transitions.get(i);
+					turnChildrenFalse(future.getTarget());
+				} 
+				continue;
+			} else if(foundInvalidPathC(currentT)){
+				System.out.println("State "+currentT.getTarget().getName()+ " is still true " + currentT.getTarget().getIndex());
+				continue;
+			}
+			traversalConstraint(currentT.getTarget());
+		}
+	}
+	
+	private void turnChildrenFalse(TSState state) {
+		if (!TSModel.visited[state.getIndex()]) {
+			return; 
+		}
+		System.out.println("State "+state.getName()+ " is now false " + state.getIndex());
+		TSModel.visited[state.getIndex()] = false;
+		ArrayList<TSTransition> transitions = state.getTransitions();
+		for (int i = 0; i < transitions.size(); i++) {
+			TSTransition currentT = transitions.get(i);
+			turnChildrenFalse(currentT.getTarget());
+		}
+	}
+
 	public void traversal(TSState state, Stack<String> stack) {
 		if (TSModel.visited[state.getIndex()]) {
 			return; /* Every state will only be visited once */
@@ -106,7 +144,17 @@ public class Eventually extends PathFormula {
 	}
 	
 	public boolean foundInvalidPath(TSTransition currentT, TSState futureState, Stack<String> stack){
-		return (!stateFormula.isValidState(futureState, stack) && !currentT.validActions(leftActions));
+		return ((!stateFormula.passConstraint(currentT.getTarget())) && !currentT.validActions(leftActions)) || 
+				(stateFormula.passConstraint(currentT.getTarget()) && !currentT.validActions(rightActions));
+	}
+	
+	public boolean foundValidPath(TSTransition currentT){
+		return (stateFormula.passConstraint(currentT.getTarget()) && currentT.validActions(rightActions));
+	}
+	
+	public boolean foundInvalidPathC(TSTransition currentT){
+		return ((!stateFormula.passConstraint(currentT.getTarget())) && !currentT.validActions(leftActions)) || 
+				(stateFormula.passConstraint(currentT.getTarget()) && !currentT.validActions(rightActions)) ;
 	}
 
 	

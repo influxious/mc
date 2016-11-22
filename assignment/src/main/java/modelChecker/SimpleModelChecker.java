@@ -1,6 +1,7 @@
 package modelChecker;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
@@ -18,15 +19,28 @@ public class SimpleModelChecker implements ModelChecker {
 		ArrayList<TSState> iStates = model.getInitialStates();	
 		for (int i = 0; i < iStates.size(); i++) {
 			TSState s = iStates.get(i);
+			Arrays.fill(TSModel.visited, true);
+ 			if(!constraint.passConstraint(s)){
+				return false; /* invalid constraint */
+			}
+ 			
+// 			for (int j = 0; j < TSModel.visited.length;j++) {
+// 				if(TSModel.visited[j]){
+// 					System.out.println("TRUE " );
+// 				} else {
+// 					System.out.println("FALSE ");
+// 				}
+// 			}
+
+ 			
 			if(!query.isValidState(s, stack)){
 				getTrace();
 				return false;
 			}
 
-			if(!constraint.passConstraint(s)){
-				return false;
-			}
+			
 		}
+		
 		return true;
 	}
 	
