@@ -61,12 +61,12 @@
 		{
 			"source": "s1",
 			"target": "s0",
-			"actions": ["LeaveWait1"]
+			"actions": ["Leave1"]
 		},
 		{
 			"source": "s2",
 			"target": "s0",
-			"actions": ["LeaveWait2"]
+			"actions": ["Leave2"]
 		},
 
 		{
@@ -124,38 +124,37 @@
 			"actions": ["EnterCritical2"]
 		},
 
-
 		{
 			"source": "s6",
 			"target": "s0",
-			"actions": ["Critical1_Wait2_0"]
+			"actions": ["Leave1"]
 		},
 		{
 			"source": "s7",
 			"target": "s0",
-			"actions": ["Critical2_Wait1_0"]
+			"actions": ["Leave2"]
 		},
 
 		{
 			"source": "s6",
 			"target": "s8",
-			"actions": ["Critical1_Waiting2_Critical"]
+			"actions": ["EnterCritical2"]
 		},
 		{
 			"source": "s7",
 			"target": "s8",
-			"actions": ["Critical2_Waiting1_Critical"]
+			"actions": ["EnterCritical1"]
 		},
 
 		{
 			"source": "s8",
 			"target": "s1",
-			"actions": ["Critical_Wait1"]
+			"actions": ["Wait1"]
 		},
 		{
 			"source": "s8",
 			"target": "s2",
-			"actions": ["Critical_Wait2"]
+			"actions": ["Wait2"]
 		}
 	]
 }
