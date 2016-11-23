@@ -87,9 +87,14 @@ public class Always extends PathFormula {
 		
 	public void allPaths(TSState state, TSTransition currentT, Stack<String> stack){
 		TSState futureState = currentT.getTarget();
-		if(foundInvalidPath(currentT, futureState, stack)){
+		if(invalidSF(futureState, stack)){
 			validAll = false;
-			stack.push("Invalid state found at " + futureState.getName());
+			stack.push("Invalid atomic proposition found at " + futureState.getName());
+			stack.push(state.getName() + " --" + currentT.printActions() + "--> " + futureState.getName());
+			return;
+		} else if(invalidAction(currentT)){
+			validAll = false;
+			stack.push("Invalid action from " + state.getName() + " to " + futureState.getName());
 			stack.push(state.getName() + " --" + currentT.printActions() + "--> " + futureState.getName());
 			return;
 		}
@@ -120,5 +125,13 @@ public class Always extends PathFormula {
 	public boolean foundValidPath(int nTransitions){
 		return (nTransitions == 0);
 	}
+	
+	public boolean invalidSF(TSState futureState, Stack<String> stack){
+		return (!stateFormula.isValidState(futureState, stack));
+	}
 
+	public boolean invalidAction(TSTransition currentT){
+		return (!currentT.validActions(actions));
+	}
+	
 }

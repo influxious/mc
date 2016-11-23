@@ -27,8 +27,8 @@ public class ThereExists extends StateFormula {
     }
     
     @Override
-    public boolean passConstraint(TSState state){
-    	return pathFormula.passConstraint(state, this);
+    public boolean passConstraint(TSState state) throws IllegalArgumentException {
+    	return true;
     }
     
 }

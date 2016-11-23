@@ -1,7 +1,5 @@
 package modelChecker;
 
-import java.util.Set;
-
 import tsmodel.TSModel;
 import formula.stateFormula.StateFormula;
 

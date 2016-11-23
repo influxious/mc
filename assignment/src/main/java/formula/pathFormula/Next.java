@@ -91,9 +91,14 @@ public class Next extends PathFormula {
 	public void allPaths(TSState state, TSTransition currentT, Stack<String> stack){
 		TSState futureState = currentT.getTarget();
 	
-		if(foundInvalidPath(currentT, futureState, stack)){
+		if(invalidAP(futureState, stack)){
 			validAll = false;
-			stack.push("Invalid state found at " + futureState.getName());
+			stack.push("Invalid atomic proposition found at " + futureState.getName());
+			stack.push(state.getName() + " --" + currentT.printActions() + "--> " + futureState.getName());
+			return;
+		} else if(invalidAction(currentT)){
+			validAll = false;
+			stack.push("Invalid action from " + state.getName() + " to " + futureState.getName());
 			stack.push(state.getName() + " --" + currentT.printActions() + "--> " + futureState.getName());
 			return;
 		}
@@ -121,6 +126,14 @@ public class Next extends PathFormula {
 	
 	public boolean foundInvalidPath(TSTransition currentT, TSState futureState, Stack<String> stack){
 		return ((!stateFormula.isValidState(futureState, stack)) || !currentT.validActions(actions));
+	}
+	
+	public boolean invalidAP(TSState futureState, Stack<String> stack){
+		return ((!stateFormula.isValidState(futureState, stack)));
+	}
+	
+	public boolean invalidAction(TSTransition currentT){
+		return (!currentT.validActions(actions));
 	}
 	
 	public boolean foundValidPath(TSTransition currentT, TSState futureState, Stack<String> stack){

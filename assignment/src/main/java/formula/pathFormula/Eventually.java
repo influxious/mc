@@ -142,10 +142,10 @@ public class Eventually extends PathFormula {
 	}
 	
 	public boolean foundInvalidPath(TSTransition currentT, TSState futureState, Stack<String> stack){
-		return ((!stateFormula.passConstraint(currentT.getTarget())) && !currentT.validActions(leftActions)) || 
-				(stateFormula.passConstraint(currentT.getTarget()) && !currentT.validActions(rightActions));
+		return ((!stateFormula.isValidState(currentT.getTarget(), stack) && !currentT.validActions(leftActions)) || 
+				((stateFormula.isValidState(currentT.getTarget(), stack)) && !currentT.validActions(rightActions)));
 	}
-	
+		
 	public boolean foundValidPath(TSTransition currentT){
 		return (stateFormula.passConstraint(currentT.getTarget()) && currentT.validActions(rightActions));
 	}
