@@ -50,100 +50,112 @@
 		{
 			"source": "s0",
 			"target": "s1",
-			"actions": ["p1EnterWait"]
+			"actions": ["EnterWait1"]
 		},
 		{
 			"source": "s0",
 			"target": "s2",
-			"actions": ["p2EnterWait"]
+			"actions": ["EnterWait2"]
 		},
 
 		{
 			"source": "s1",
 			"target": "s0",
-			"actions": ["p1LeaveWait"]
+			"actions": ["LeaveWait1"]
 		},
 		{
 			"source": "s2",
 			"target": "s0",
-			"actions": ["p2LeaveWait"]
+			"actions": ["LeaveWait2"]
 		},
 
 		{
 			"source": "s1",
 			"target": "s3",
-			"actions": ["p1EnterCritical"]
+			"actions": ["EnterCritical1"]
 		},
 		{
 			"source": "s2",
 			"target": "s4",
-			"actions": ["p2EnterCritical"]
+			"actions": ["EnterCritical2"]
 		},
 
 		{
 			"source": "s1",
 			"target": "s5",
-			"actions": ["p1Waiting"]
+			"actions": ["Wait1Wait2"]
 		},
 		{
 			"source": "s2",
 			"target": "s5",
-			"actions": ["p2Waiting"]
+			"actions": ["Wait2Wait1"]
 		},
 
 		{
 			"source": "s5",
 			"target": "s1",
-			"actions": ["p1AtWaiting"]
+			"actions": ["Wait1"]
 		},
 		{
 			"source": "s5",
 			"target": "s2",
-			"actions": ["p2AtWaiting"]
+			"actions": ["Wait2"]
 		},
 
 		{
 			"source": "s3",
 			"target": "s6",
-			"actions": ["p1Critical_p2Waiting"]
+			"actions": ["Critical1_Wait2"]
 		},
 		{
 			"source": "s4",
 			"target": "s7",
-			"actions": ["p2Critical_p1Waiting"]
+			"actions": ["Critical2_Wait1"]
 		},
+
+		{
+			"source": "s5",
+			"target": "s6",
+			"actions": ["EnterCritical1"]
+		},
+		{
+			"source": "s5",
+			"target": "s7",
+			"actions": ["EnterCritical2"]
+		},
+
 
 		{
 			"source": "s6",
 			"target": "s0",
-			"actions": ["p1Critical_p2Waiting_0"]
+			"actions": ["Critical1_Wait2_0"]
 		},
 		{
 			"source": "s7",
 			"target": "s0",
-			"actions": ["p2Critical_p1Waiting_0"]
+			"actions": ["Critical2_Wait1_0"]
 		},
 
 		{
 			"source": "s6",
 			"target": "s8",
-			"actions": ["p1Critical_p2Waiting_Critical"]
+			"actions": ["Critical1_Waiting2_Critical"]
 		},
 		{
 			"source": "s7",
 			"target": "s8",
-			"actions": ["p2Critical_p1Waiting_Critical"]
+			"actions": ["Critical2_Waiting1_Critical"]
 		},
 
 		{
 			"source": "s8",
 			"target": "s1",
-			"actions": ["Critical_p1EnterWait"]
+			"actions": ["Critical_Wait1"]
 		},
 		{
 			"source": "s8",
 			"target": "s2",
-			"actions": ["Critical_p2EnterWait"]
+			"actions": ["Critical_Wait2"]
 		}
 	]
 }
