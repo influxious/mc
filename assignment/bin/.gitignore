@@ -1,10 +1,17 @@
+/.DS_Store
 /formula/
-/modelChecker/
-/ctlThereExistsEventually.json
-/modelThereExistsEventually.json
-/ctlUntil.json
-/modelUntil.json
+/constraint1.json
+/constraint2.json
+/ctl1.json
+/ctl2.json
+/model1.json
+/model2.json
 /my-examples/
-/tsmodel/
 /model/
+<<<<<<< HEAD
 /other-examples/
+=======
+/modelChecker/
+/other-examples/
+/tsmodel/
+>>>>>>> origin/master

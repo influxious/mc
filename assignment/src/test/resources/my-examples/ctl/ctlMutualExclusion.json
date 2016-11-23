@@ -1,0 +1,5 @@
+{
+	"formula": "( AG !( a && b ))",
+	"a": ["critical1"],
+	"b": ["critical2"]
+}
