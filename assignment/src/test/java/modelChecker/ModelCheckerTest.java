@@ -1,5 +1,6 @@
 package modelChecker;
 
+
 import static org.junit.Assert.*;
 
 import java.io.IOException;
@@ -279,12 +280,30 @@ public class ModelCheckerTest {
 	public void buildAndCheckModel_thereExistsAlways2() {
 		try {
 			Model model = Model
-					.parseModel("src/test/resources/my-examples/model/modelThereExistsAlways2.json");
+					.parseModel("src/test/resources/my-examples/model/modelForAllAlways2.json");
 			TSModel ts = Model.transform(model);
 			StateFormula fairnessConstraint = new FormulaParser(
 					"src/test/resources/constraint1.json").parse();
 			StateFormula query = new FormulaParser(
-					"src/test/resources/my-examples/ctl/ctlThereExistsAlways2.json").parse();
+					"src/test/resources/my-examples/ctl/ctlForAllAlways.json").parse();
+			ModelChecker mc = new SimpleModelChecker();
+			assertTrue(mc.check(ts, fairnessConstraint, query));
+		} catch (IOException e) {
+			e.printStackTrace();
+			fail(e.toString());
+		}
+	}
+
+	@Test
+	public void buildAndCheckModel_mutualExclusion() {
+		try {
+			Model model = Model
+					.parseModel("src/test/resources/my-examples/model/modelMutualExclusion.json");
+			TSModel ts = Model.transform(model);
+			StateFormula fairnessConstraint = new FormulaParser(
+					"src/test/resources/constraint1.json").parse();
+			StateFormula query = new FormulaParser(
+					"src/test/resources/my-examples/ctl/ctlMutualExclusion.json").parse();
 			ModelChecker mc = new SimpleModelChecker();
 			assertTrue(mc.check(ts, fairnessConstraint, query));
 		} catch (IOException e) {
