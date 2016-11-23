@@ -146,7 +146,7 @@ public class ModelCheckerTest {
 			fail(e.toString());
 		}
 	}
-	/*
+	
 	@Test
 	public void buildAndCheckModel_thereExistsEventually() {
 		try {
@@ -154,17 +154,18 @@ public class ModelCheckerTest {
 					.parseModel("src/test/resources/my-examples/model/modelThereExistsEventually.json");
 			TSModel ts = Model.transform(model);
 			StateFormula fairnessConstraint = new FormulaParser(
-					"src/test/resources/constraint1.json").parse();
+					"src/test/resources/my-examples/constraint/cThereExistsEventually.json").parse();
 			StateFormula query = new FormulaParser(
 					"src/test/resources/my-examples/ctl/ctlThereExistsEventually.json").parse();
 			ModelChecker mc = new SimpleModelChecker();
 			assertTrue(mc.check(ts, fairnessConstraint, query));
+
 		} catch (IOException e) {
 			e.printStackTrace();
 			fail(e.toString());
 		}
 	}
-	
+
 	@Test
 	public void buildAndCheckModel_forAllUntil() {
 		try {
@@ -172,7 +173,7 @@ public class ModelCheckerTest {
 					.parseModel("src/test/resources/my-examples/model/modelForAllUntil.json");
 			TSModel ts = Model.transform(model);
 			StateFormula fairnessConstraint = new FormulaParser(
-					"src/test/resources/constraint1.json").parse();
+					"src/test/resources/my-examples/constraint/cForAllUntil.json").parse();
 			StateFormula query = new FormulaParser(
 					"src/test/resources/my-examples/ctl/ctlForAllUntil.json").parse();
 			ModelChecker mc = new SimpleModelChecker();
@@ -182,7 +183,7 @@ public class ModelCheckerTest {
 			fail(e.toString());
 		}
 	}
-	
+
 	@Test
 	public void buildAndCheckModel_thereExistsUntil() {
 		try {
@@ -190,7 +191,7 @@ public class ModelCheckerTest {
 					.parseModel("src/test/resources/my-examples/model/modelThereExistsUntil.json");
 			TSModel ts = Model.transform(model);
 			StateFormula fairnessConstraint = new FormulaParser(
-					"src/test/resources/constraint1.json").parse();
+					"src/test/resources/my-examples/constraint/cThereExistsUntil.json").parse();
 			StateFormula query = new FormulaParser(
 					"src/test/resources/my-examples/ctl/ctlThereExistsUntil.json").parse();
 			ModelChecker mc = new SimpleModelChecker();
@@ -208,7 +209,7 @@ public class ModelCheckerTest {
 					.parseModel("src/test/resources/my-examples/model/modelForAllNext.json");
 			TSModel ts = Model.transform(model);
 			StateFormula fairnessConstraint = new FormulaParser(
-					"src/test/resources/constraint1.json").parse();
+					"src/test/resources/my-examples/constraint/cForAllNext.json").parse();
 			StateFormula query = new FormulaParser(
 					"src/test/resources/my-examples/ctl/ctlForAllNext.json").parse();
 			ModelChecker mc = new SimpleModelChecker();
@@ -226,7 +227,7 @@ public class ModelCheckerTest {
 					.parseModel("src/test/resources/my-examples/model/modelThereExistsNext.json");
 			TSModel ts = Model.transform(model);
 			StateFormula fairnessConstraint = new FormulaParser(
-					"src/test/resources/constraint1.json").parse();
+					"src/test/resources/my-examples/constraint/cThereExistsNext.json").parse();
 			StateFormula query = new FormulaParser(
 					"src/test/resources/my-examples/ctl/ctlThereExistsNext.json").parse();
 			ModelChecker mc = new SimpleModelChecker();
@@ -256,7 +257,7 @@ public class ModelCheckerTest {
 			fail(e.toString());
 		}
 	}
-*/
+
 	
 	
 

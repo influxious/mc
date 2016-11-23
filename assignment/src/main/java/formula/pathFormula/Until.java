@@ -62,8 +62,44 @@ public class Until extends PathFormula {
 	
 	@Override
     public boolean passConstraint(TSState state, StateFormula sf){
+		traversalConstraint(state);
 		return true;
     }
+	
+	public void traversalConstraint(TSState state) {
+		if (!TSModel.visited[state.getIndex()]) {
+			return; 
+		}
+		TSModel.visited[state.getIndex()] = false;
+		ArrayList<TSTransition> transitions = state.getTransitions();
+		for (int i = 0; i < transitions.size(); i++) {
+			TSTransition currentT = transitions.get(i);
+			
+			if(foundValidPathC(currentT)){
+				for(int j=0; j<state.getTransitions().size(); j++){
+					TSTransition future = transitions.get(i);
+					turnChildrenFalse(future.getTarget());
+				} 
+				continue;
+			}
+			if(foundInvalidPathC(currentT)){
+				continue;
+			}
+			traversalConstraint(currentT.getTarget());
+		}
+	}
+	
+	private void turnChildrenFalse(TSState state) {
+		if (!TSModel.visited[state.getIndex()]) {
+			return; 
+		}
+		TSModel.visited[state.getIndex()] = false;
+		ArrayList<TSTransition> transitions = state.getTransitions();
+		for (int i = 0; i < transitions.size(); i++) {
+			TSTransition currentT = transitions.get(i);
+			turnChildrenFalse(currentT.getTarget());
+		}
+	}
 	
 	public void traversal(TSState state, Stack<String> stack) {
 		if (TSModel.visited[state.getIndex()]) {
@@ -122,11 +158,25 @@ public class Until extends PathFormula {
 	}
 	
 	public boolean foundInvalidPath(TSTransition currentT, Stack<String> stack){
-		return (((checkingLeft) && !currentT.validActions(leftActions)) || ((checkingLeft) && !left.isValidState(currentT.getTarget(), stack)));
+		return ((((checkingLeft) && !currentT.validActions(leftActions)) || ((checkingLeft) && !left.isValidState(currentT.getTarget(), stack))) && !TSModel.visited[currentT.getTarget().getIndex()]);
 	}
 	
 	public boolean handleLoop(TSState futureState, Stack<String> stack){
 		return ((checkingLeft) && left.isValidState(futureState, stack) && TSModel.visited[futureState.getIndex()]);
 	}	
+	
+	private boolean foundInvalidPathC(TSTransition currentT) {
+		return (((checkingLeft) && !currentT.validActions(leftActions)) || ((checkingLeft) && !left.passConstraint(currentT.getTarget())));
+	}
+
+	private boolean foundValidPathC(TSTransition currentT) {
+		if((checkingLeft) && right.passConstraint(currentT.getTarget())){
+			checkingLeft = false;
+		} 
+		if(foundInvalidPathC(currentT)){
+			return false;
+		} return (currentT.validActions(rightActions) && right.passConstraint(currentT.getTarget()));
+	}
+
 	
 }

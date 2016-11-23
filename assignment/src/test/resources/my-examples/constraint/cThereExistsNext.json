@@ -1,4 +1,4 @@
 {
-	"formula": "( AbX p )",
+	"formula": "( AbX (p && w) )",
 	"b": ["act1", "act2", "act3"]
 }
