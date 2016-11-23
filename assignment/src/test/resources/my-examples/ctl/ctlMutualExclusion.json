@@ -1,5 +1,3 @@
 {
-	"formula": "( AG !( a && b ))",
-	"a": ["critical1"],
-	"b": ["critical2"]
+	"formula": "( AG !( critical1 && critical2 ))"
 }
