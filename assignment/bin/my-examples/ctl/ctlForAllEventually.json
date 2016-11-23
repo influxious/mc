@@ -1,0 +1,5 @@
+{
+	"formula": "( AbFc p )",
+	"b": ["act1", "act2"],
+	"c": ["act3", "act4"]
+}

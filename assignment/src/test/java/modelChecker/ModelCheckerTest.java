@@ -128,12 +128,7 @@ public class ModelCheckerTest {
 			fail(e.toString());
 		}
 	}
-<<<<<<< HEAD
-	
-	
-=======
 
->>>>>>> origin/master
 	@Test
 	public void buildAndCheckModel_forAllEventually() {
 		try {
@@ -242,13 +237,9 @@ public class ModelCheckerTest {
 			fail(e.toString());
 		}
 	}
-<<<<<<< HEAD
-	
-		
-=======
+
 
 	/*
->>>>>>> origin/master
 	@Test
 	public void buildAndCheckModel_examples() {
 		try {
@@ -267,13 +258,11 @@ public class ModelCheckerTest {
 			fail(e.toString());
 		}
 	}
-<<<<<<< HEAD
+
 
 	
 	
-=======
 	*/
->>>>>>> origin/master
 
 	// New:
 	@Test
